@@ -89,6 +89,17 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     border-bottom: 1px solid #E9E9E9;
 }
 
+.skrollable-after .navbar-nav > li > a {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -1px;
+}
+.nav > li > a:hover {
+    background-color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) -moz-use-text-color;
+    color: #1ABB9C;
+}
+
 #scrollUp {
 	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.15);
 }
