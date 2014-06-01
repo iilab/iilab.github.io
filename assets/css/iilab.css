@@ -84,6 +84,19 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     font-size: 45px;
 }
 
+
+@media (max-width: 767px) {
+    #hero h1 {
+        font-size: 32px;
+    }
+}
+
+@media (min-width: 768px) and (max-height: 1024px) {
+    #hero h1 {
+        font-size: 39px;
+    }
+}
+
 .navbar-header {
     background: none repeat scroll 0 0 #F7F7F7;
     border-bottom: 1px solid #E9E9E9;
@@ -98,6 +111,16 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     background-color: #FFFFFF;
     border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) -moz-use-text-color;
     color: #1ABB9C;
+}
+
+.member .text-overlay .info .social li a:hover .icon-s-github {
+    color: #555555;
+    color: #333333;
+}
+
+.social a .icon-s-github:after {
+    color: #555555;
+    color: #333333;
 }
 
 #scrollUp {
