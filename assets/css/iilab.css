@@ -119,9 +119,16 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 
 .social a .icon-s-github:after {
-    color: #555555;
-    color: #333333;
+    background: #555555;
+    background: #333333;
 }
+
+.social a .icon-s-linkedin:after {
+    background: #0077B5;
+    background: #0077B5;
+}
+
+
 
 #scrollUp {
 	background: none repeat scroll 0 0 rgba(255, 255, 255, 0.15);
