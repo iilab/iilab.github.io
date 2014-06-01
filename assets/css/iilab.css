@@ -101,6 +101,12 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     }
 }
 
+@media (max-width: 991px) {
+    .yamm ul.nav.pull-right {
+        float:none !important;
+    }
+}
+
 .navbar-header {
     background: none repeat scroll 0 0 #F7F7F7;
     border-bottom: 1px solid #E9E9E9;
@@ -112,7 +118,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     margin-top: -1px;
 }
 .nav > li > a:hover {
-    background-color: #FFFFFF;
+    background-color: transparent;
     border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) -moz-use-text-color;
     color: #1ABB9C;
 }
