@@ -19,6 +19,11 @@ h6 {
     box-shadow: none;
 }
 
+#blog-post .post img {
+width: 100%;
+height: auto;
+}
+
 figcaption.overlay p {
     font-family: 'Source Sans Pro',sans-serif;
     font-size: 22px;
