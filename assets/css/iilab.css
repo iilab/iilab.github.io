@@ -49,7 +49,7 @@ figcaption.overlay {
     transition: all 200ms ease-out 0s;
 }
 
-.post-contents ul li:before {
+.post-project ul li:before, .post-contents ul li:before {
     color: #1ABB9C;
     content: "";
     font-family: 'fontello-circle';
