@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>iilab | The lay of the Ocean</title>
+        <title>iilab | Open Droplet</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -93,113 +93,75 @@
 		</header>
 
 		<main>
-			<section id="blog-post" class="light-bg">
-				<div class="container inner-bottom classic-blog">
+			<section id="portfolio-post">
+				<div class="container inner-top-md">
 					<div class="row">
 						
-						<div class="col-md-12 inner-sm">
+						<div class="col-md-8">
+							<div id="owl-work" class="owl-carousel owl-inner-pagination owl-inner-nav owl-ui-md owl-one-item">
 								
-							<div class="sidemeta">
-
-															<div class="post format-gallery">
-									
-									<div class="date-wrapper">
-										<div class="date">
-											<span class="day">09</span>
-											<span class="month">Jun</span>
-											<span class="month">2014</span>
-										</div><!-- /.date -->
-									</div><!-- /.date-wrapper -->
-									
-									<div class="format-wrapper">
-										<a href="#owl-work"><i class="icon-picture"></i></a>
-									</div><!-- /.format-wrapper -->
-									
-									<div class="post-content">
-										
-										<p class="author"><a href="#author" title="Post author" data-rel="tooltip" data-placement="left">Kat Austen</a></p> 
-										
-										<h1 class="post-title">The lay of the Ocean</h1>
-										
-										<ul class="meta">
-											
-											
-											<li class="categories">droplet, sensors, open energy monitor, sprav</li>
-											<!--<li class="comments"><a href="#">24</a></li>
-											<li class="likes"><a href="#">73</a></li>-->
-										</ul><!-- /.meta -->
-										
-										<p>Open Droplet is by no means the first gizmo out there to measure water usage, and like anyone who is designing anything, we&#39;ve had a good look at what&#39;s out there. We&#39;d like to share what we&#39;ve found and open up the discussion to interrogate our own design decisions. We have stuck to non-invasive flow metres, as we would rather plumbing wasn&#39;t required for fitting Open Droplet.</p>
-
-
-										<div id="owl-work" class="owl-carousel owl-inner-pagination owl-inner-nav post-media">
-											
-											<div class="item">
-												<figure>
-													<img src="/assets/images/news/timer_bob.png" alt="">
-													<em></em>
-												</figure>
-											</div><!-- /.item -->
-											
-										</div><!-- /.owl-carousel -->
-										
-
-										<div class="post-contents">
-										
-
-<h2 id="timers">Timers</h2>
-<p>There are absolutely stacks of timers out there that measure how long you&#39;re in the shower - some of them also have calibration so that they estimate - by timing your shower and multiplying this by the calibration constant you set at the beginning of your relationship with the device - how much water you&#39;ve used. These don&#39;t have a direct measurement component.We haven&#39;t yet found one that is networked. They are quite different from what we&#39;re trying to achieve with Open Droplet.</p>
-<p><img src="/assets/images/news/timer_drop.png" alt="Drop">
-<img src="/assets/images/news/timer_duck.png" alt="Duck"></p>
-<h2 id="sensors">Sensors</h2>
-<p>We&#39;ve found one device, the <strong><a href="http://www.waterpebble.com/">waterpebble</a></strong>, that senses - we think through conductance, although it could be a motion sensor - when your shower turns on, and then works on a time based calculation to tell you when to stop showering. It iteratively decreases the advised shower time every time you shower and alerts you by a traffic light system. It doesn&#39;t seem to have much of a presence any more and is no longer available on a number of its distribution platforms. A nice touch was that you don&#39;t have to install it - it lives at the bottom of your shower basin.</p>
-<p><img src="/assets/images/news/Waterpebble.png" alt="Water Pebble"></p>
-<p>There&#39;s also the <strong><a href="spravwater.com">Sprāv</a></strong>, not yet to market, which is a networked sensor that uses a piezo to monitor flow and then indicates by a traffic light system when you should stop showering. It also has an app interface that collects and visualises the data for QS folks. The designers say there&#39;s going to be an open API, but I&#39;m not clear if the hardware is open. </p>
-<p><img src="/assets/images/news/Sprav.jpeg" alt="Sprav"></p>
-<h2 id="ecosystem">Ecosystem</h2>
-<p>Outside of the water sensing realm, there&#39;s also the <strong><a href="http://openenergymonitor.org/emon/">Open Energy Monitor</a></strong> which is very much aligned with our own approach of openness and also uses the Nanode (which our Lead Hardware Engineer <a href="https://iilab.org/#team">Sam</a> contributed to). We&#39;re looking into their software stack to see if we could reuse an contribute to it. </p>
-<p><img src="/assets/images/news/OEM_system.png" alt="Open Energy Monitor">
-<img src="/assets/images/news/OEM_water.JPG" alt="An invasive flow meter"></p>
-<p>As far as we can see, it&#39;s not quite there for water, but their <a href="http://openenergymonitor.org/emon/applications/water">page about water sensing</a> and some <a href="http://openenergymonitor.org/emon/node/3324">discussions</a> <a href="http://openenergymonitor.org/emon/node/3467">on their forum</a> show that <strong>there is interest!</strong> </p>
-
-										</div>
-										
-									</div><!-- /.post-content -->
-									
-								</div><!-- /.post -->
 								
-								<div id="author" class="post-author">
+								<div class="item">
 									<figure>
-										
-										<div class="author-image icon-overlay icn-link">
-											<a href="#"><img src="/assets/images/persons/kat.jpg" alt=""></a>
-										</div>
-										
-										<figcaption class="author-details">
-											<h3>About the author</h3>
-											<p><a href="http://katausten.com">Kat Austen</a> Kat is a person. She’s interested in lots of things and phenomena, how things are connected, and why they are connected. She likes patterns but doesn’t have to have them. In the temporal melting-pot of her life so far she has been a scientist, an artist, a journalist and a writer. She welcomes a humane and environmentally kind future.</p>
-											<ul class="meta">
-												<!--<li class="author-posts"><a href="#">All posts by Kat Austen</a></li>-->
-												<li class="url"><a href="http://katausten.com">http://katausten.com</a></li>
-											</ul><!-- /.meta -->
-											<ul class="social">
-												<li><a href="https://twitter.com/katausten"><i class="icon-s-twitter"></i></a></li>
-												<li><a href="http://de.linkedin.com/pub/kat-austen/4/579/216"><i class="icon-s-linkedin"></i></a></li>
-												<li><a href="https://github.com/iamkat"><i class="icon-s-github"></i></a></li>
-											</ul><!-- /.social -->
-										</figcaption>
-										
+										<img src="/assets/images/projects/work_droplet.png" alt="Open Droplet Website">
 									</figure>
-								</div><!-- /.post-author -->								
-							
-															    <div id="disqus_thread"></div>
+								</div><!-- /.item -->
+								
+							</div><!-- /.owl-carousel -->
+							<div class="post-project"><p class="text-small"><h2 id="what-is-open-droplet-">What is Open Droplet?</h2>
+<p>Open Droplet is an open source, open hardware water measurement sensor that is networked and easy to use.</p>
+<h2 id="why-measure-water-usage-">Why measure water usage?</h2>
+<p>Water is one of the <a href="https://www.un.org/waterforlifedecade/scarcity.shtml">world’s most stressed resources</a>. Usage has shot up by more than double the rate of population increase, meaning we are guzzling more water per head than ever before.</p>
+<p>Off the back of some of our <a href="https://iilab.org/news/2014-09-10-water-water-everywhere.html">preliminary research</a>, one key component of what we are planning to do with Open Droplet is to provide context to the data collected by individual sensors. This will involve a two-way flow of data between individuals, and utilities and public bodies who are responsible for the water infrastructure. This turns Open Droplet into more than just a water sensor - it&#39;s a means of understanding how individual water flows fit within the overall water infrastructure.</p>
+</p></div>
+						</div><!-- /.col -->
 
-	
-							</div><!-- /.sidemeta -->
-						</div><!-- /.col -->						
+						
+						<div class="col-md-4 inner-left-sm">
+							<header>
+								<h2>Open Droplet</h2>			
+								<p class="text-small"></p>				
+								<ul class="item-details inner-top-xs outer-top-xs border-top">
+									<li class="date">Date: 2013.08.01 - Current </li>
+									
+									
+								</ul><!-- /.item-details -->
+								
+								<ul class="item-details inner-top-xs outer-top-xs border-top">
+									<li><h4>Project Links</h4></li>
+									<li class="url"><a href="https://opendroplet.org">Website</a></li>
+								</ul><!-- /.item-details -->
+								
+								
+								<ul class="item-details inner-top-xs outer-top-xs border-top">
+									<li><h4>Project Partners</h4></li>
+									<li class="url"><a href="http://resurgence.io">Resurgence</a></li><li class="url"><a href="https://etemu.org">Etemu</a></li>
+								</ul><!-- /.item-details -->
+								
+								
+							</header>
+						</div><!-- /.col -->
+						
+					</div><!-- /.row -->
+
+				</div><!-- /.container -->
+				
+			</section>
+
+			<section id="get-in-touch">
+				<div class="container inner">
+					<div class="row">
+						<div class="col-md-8 col-sm-9 center-block text-center">
+							<header>
+								<h1>Find out more</h1>
+								<p>Contact us to learn more about iilab's approach<br/> to innovative technology for social impact.</p>
+							</header>
+							<a href="mailto:contact@iilab.org" class="btn btn-large">Contact Us</a>
+						</div><!-- /.col -->
 					</div><!-- /.row -->
 				</div><!-- /.container -->
 			</section>
+
 		</main>
 		<footer class="dark-bg">
 			<div class="container inner">
@@ -339,14 +301,6 @@
 			</div><!-- .footer-bottom -->
 		</footer>
 		
-<script type="text/javascript">
-    var disqus_shortname = 'iilab';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
 
                 <!-- JavaScripts placed at the end of the document so the pages load faster -->
         <!-- Piwik -->
