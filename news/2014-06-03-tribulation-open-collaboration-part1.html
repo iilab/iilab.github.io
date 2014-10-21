@@ -131,7 +131,6 @@
 										
 										<p><em>This is the first part of a series on tools for open collaboration. This first part will focus on managing content in an open way with collaborative editing platforms. In the next posts we&#39;ll look at file sharing and document management, task management and communication tools.</em></p>
 
-
 										<div id="owl-work" class="owl-carousel owl-inner-pagination owl-inner-nav post-media">
 											
 											<div class="item">
@@ -146,66 +145,6 @@
 
 										<div class="post-contents">
 										
-
-<p>One way I like to procrastinate is by trying to find betters tools. When things aren&#39;t as smooth and natural as I would expect, then after a while I go for a round of search and trials, fill up comparison spreadsheets - like for <a href="https://docs.google.com/spreadsheet/pub?key=0AhQdlH5mVj3PdGE3bVQ4amtxcWdLUFMwYXpnb0NSamc&amp;single=true&amp;gid=0&amp;output=html">project management software</a> - or think about how to build tools to compare tools better (no <a href="https://github.com/iilab/openintegrity/issues/34">really</a>). I find it edifying to see how different people think differently about organising the way they work. Well that&#39;s my justification anyway, sometimes it&#39;s just me spending too much time <em>thinking about doing</em> rather than <em>doing</em>... </p>
-<p>Our team is tech savvy, willing to experiment and push the boundaries of how we do things. For instance, with the Open Integrity index, we&#39;ve tried to be <a href="https://wiki.openintegrity.org">as open as possible</a> during the implementation of the project. In her art and writing, Kat is a supporter of Open Access publishing and Creative Commons. Sam is completely dedicated to the principles of sharing, such as his <a href="http://opensourceecology.org/wiki/Samthetechie_log">log about his time at Open Source Ecology</a>, with the aim of allowing to build on top of what he&#39;s done. </p>
-<h2 id="in-the-world-of-open-practices">In the world of Open practices</h2>
-<p>As when I start any new project, I&#39;ve been researching the best ways to work together openly for Droplet. I&#39;ve used different approaches for different projects, both to try them out and to cater for different audiences and teams. There are some great experiments out there to learn from: from the more business inspired to the more community driven. </p>
-<p>Gittip&#39;s founder - also one of the initiators of the (Open Company Initiative](<a href="http://www.opencompany.org/about/">http://www.opencompany.org/about/</a>) - made it a practice to <a href="https://medium.com/building-gittip/5886749a4ded">hold partner calls &quot;on air&quot;</a>. There are also some formal methodologies out there to implement an Open Design process like the <a href="http://issuu.com/openp2pdesign/docs/openp2pdesign.toolkit_pixelache">Open P2P Design Toolkit</a> - &quot;a simple tool for helping people approach design thinking on a metadesign level&quot;. Sounds simple to me! Though it would be nice to see the source for the toolkit on github.... And the <a href="https://github.com/OpenDesign-WorkingGroup/Open-Design-Definition/blob/master/open.design_definition/open.design.definition.md">Open Design Definition</a> which however probably will focus on <a href="https://github.com/OpenDesign-WorkingGroup/Open-Design-Definition/issues/17">the nature of the knowledge shared rather than the processes that enable it</a>.</p>
-<h2 id="putting-it-in-motion">Putting it in motion</h2>
-<p>Droplet <a href="https://www.penflip.com/jun/droplet/blob/master/open-design.txt">aims to adhere to the principles</a> of the <a href="https://github.com/OpenDesign-WorkingGroup/Open-Design-Definition/blob/03c2d543242fed0d8e999b79d96c6671b46406a6/open.design_definition/open.design.definition.md">current version (v0.3)</a> of the Open Design Definition and in particular commits to ensure that the &quot;source documentation is made publicly available so that anyone can study, modify, distribute, make, prototype and sell the artifact based on that design.&quot; So then what about our processes and tools? </p>
-<p>There&#39;s a spectrum of choices out there from using &quot;ready made&quot; tools that are proprietary and cost money or to integrate various existing open source components to achieve desired functionalities. I&#39;ll mention both approaches, but often in order to test if a process is the right one, it&#39;s good to be up and running fast and online platforms can be a good way to do that. You can then migrate to open source tools when you know the process works for you.</p>
-<h2 id="managing-text">Managing Text</h2>
-<p>For us text means rich text, our design documents, engineering documents, blog posts but also sometimes spreadsheet data like our budget data. Allow a team to work together on text during various moments in the project - when face to face, in a call, when we&#39;re working separately - is a way to make sure you capture things as you go along and that people are <em>on the same page</em>. </p>
-<p>Real-time collaborative editing is a good way to capture the important elements of a conversation and have a easy to access place where everyone can jot down their ideas without interrupting the conversation. In fact sharing links and pictures can help enhance a conversation as long as participants keep the right balance between face time and screen time.</p>
-<p><img src="http://www.foldingtext.com/static/gallery/1-simple.png" alt="Distraction free and live formatting with Folding Text"></p>
-<p>We like Markdown and the alternate flavors of markdown because they allow you to write your formatting without interrupting your writing of content. I particularly like interfaces which format your text live - such as <a href="https://www.penflip.com">Penflip</a>, but also <a href="http://www.foldingtext.com/">FoldingText</a>, <a href="www.hogbaysoftware.com/products/taskpaper">Task paper</a> is also an interesting variation on live formatting for task management - and I find them much better than interfaces that require to click on buttons to achieve the same goals, so while we started on google docs (because of the Google Drive integration, the Spreadsheet and the new Track Changes add-on) we&#39;ve been looking into other approaches. </p>
-<p>We also need versioning and commenting and ways to allow the public to contribute in these ways. Ideally we want to blur the lines between content publishing and collaborative documentation where various circles in the community contribute and have the permission to &quot;publish&quot; (which might mean the same thing as merging or accepting pull requests).</p>
-<p>In summary the features we are looking for are:</p>
-<ul>
-<li>Realtime collaborative editing</li>
-<li>Distraction free writing</li>
-<li>Inline (live) formatting</li>
-<li>Markdown</li>
-<li>Versionning (Git)</li>
-<li>Commentting</li>
-</ul>
-<h3 id="open-source-tools">Open Source Tools</h3>
-<ul>
-<li><p>Etherpad-lite (and its plethora of <a href="http://mclear.co.uk/2014/01/04/top-10-etherpad-plugins-2014/">less known plugins</a>)</p>
-<p><img src="http://mclear.co.uk/files/2014/01/crop-550x159.png" alt="The Page View plugin for Etherpad-lite. Looks familiar?"></p>
-</li>
-<li><p><a href="http://ethercalc.net/">Ethercalc</a> - pictured below - is a bit clunky but improving over time, and the promising <a href="https://ethersheet.org">Ethersheet</a> that still lacks features.</p>
-<p><img src="/assets/images/news/screen-shot-2014-06-03-at-215510.png" alt="Ethercal is simple and not very pretty..."></p>
-</li>
-<li><p><a href="http://substance.io/composer/">Substance</a> shifted its focus to desktop document editing (when originally it was also looking at realtime web based collaboration. But I keep an eye on this one because its <a href="https://github.com/substance">technology fundamentals are great</a>! </p>
-<p><img src="http://substance.io/images/screenshots/substance-composer-beta-3.png" alt="Substance is a beautifully designed approach to writing text"></p>
-</li>
-</ul>
-<h3 id="online-services">Online Services</h3>
-<ul>
-<li><p><a href="https://www.penflip.com">Penflip</a> - which this blog post was prepared on, but doesn&#39;t allow for live editing by multiple users. However it allows to completely open text to external collaboration. It has &quot;git&quot; at its core and therefore also allows to do version control and offline working. It has some UX problems however, for instance comments are only attached to request for modifications of the text. Also saving is a two step process (committing and pushing) which can be confusing and can be forgotten.</p>
-<p><img src="/assets/images/news/screen-shot-2014-06-03-at-220144.png" alt="This blog post being edited on Penflip"></p>
-</li>
-<li><p><a href="https://typewrite.io/">Typewrite</a> - which does allow live editing but doesn&#39;t have document folders like Penflip, and doesn&#39;t allow to comment or integrate with a git workflow.</p>
-<p><img src="/assets/images/news/screen-shot-2014-06-03-at-220525.png" alt="Typewrite looks good and distraction free but lacks integration options"></p>
-</li>
-<li><p><a href="https://stackedit.io/">Stackedit</a> - which seems promising, connects to Google Docs and Dropbox while still using Markdown. Is able to publish to github. We might try this next since Penflips&#39;s overall UI is not fantastic.</p>
-<p><img src="/assets/images/news/screen-shot-2014-06-03-at-221941.png" alt="Stackedit is a bit cluttered and inelegant but is feature rich"></p>
-</li>
-</ul>
-<h1 id="conclusion">Conclusion</h1>
-<p>I feel that the tools in this space have been changing fast in the past year. I think that organisations need to invent the processes that will work to make the most of them. I&#39;ve been told before that the most important is to just put your code out there. You can&#39;t claim to be &quot;wanting to be open source&quot; and have nothing out there for others to look at. There is a shyness and counter-intuitive thing about putting your unfinished work out there, but I find it&#39;s a healthy practice, very much worth the effort. To be honest, we can&#39;t claim to have any open source project that has garnered enough attention for it to reap the benefits of the collective intelligence and cognitive surplus pouring our way. But <a href="https://panicbutton.io">Panic Button</a> might become that, and hopefully Droplet and our other projects too. Until then, it just puts the right sort of pressure on us to deliver better work and think more about how to engage with contributors beyong traditional boundaries of organisations, roles and status.</p>
-<h1 id="your-thoughts">Your thoughts</h1>
-<p>We&#39;d really love to hear from you about your thoughts on open collaboration. Have you got a project where you&#39;re trying similar things out? Is there anything you think we could improve on? At the moment the best way to do that is to comment here on the blog, <a href="https://www.penflip.com/jun/droplet-blog-posts/blob/master/02-Tribulations-in-Open-Collaboration.txt">submit a change to this blog post to improve it</a> or contact us through contact@iilab.org - but we&#39;re going to continue to try to improve on those means too!</p>
-<h3 id="other-resources">Other Resources</h3>
-<ul>
-<li>A very good <a href="https://zapier.com/blog/collaborative-writing-tools-editorially-draft-penflip/">in depth post from Zapier about collaborative writing tools</a></li>
-<li><a href="http://alternativeto.net/">AlternativesTo </a> is a good site for finding open source alternatives to the software you already use.</li>
-<li><a href="https://socialsourcecommons.org/">Social Source Commons</a> from our friends at Aspiration Tech</li>
-<li>Gittip has <a href="http://building.gittip.com/appendices/channels">published a list of the tool they use</a>.</li>
-</ul>
-
 										</div>
 										
 									</div><!-- /.post-content -->
