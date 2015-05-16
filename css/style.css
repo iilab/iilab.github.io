@@ -6000,6 +6000,38 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     color: #333333;
 }
 
+.member .text-overlay .info .social li a:hover .icon-s-linkedin {
+    color: #DD4B39;
+    color: #DE5745;
+}
+.member .text-overlay .info .social li a:hover .icon-s-rss {
+    color: #00ACED;
+    color: #2FBBED;
+}
+
+
+.btn-share-lg:hover .icon-s-github:after,
+.btn-share-md:hover .icon-s-github:after,
+.btn-share-sm:hover .icon-s-github:after,
+.btn-share-xs:hover .icon-s-github:after {
+    background: #555555;
+    background: #333333;
+}
+.btn-share-lg:hover .icon-s-linkedin:after,
+.btn-share-md:hover .icon-s-linkedin:after,
+.btn-share-sm:hover .icon-s-linkedin:after,
+.btn-share-xs:hover .icon-s-linkedin:after {
+    background: #0077B5;
+    background: #0077B5;
+}
+.btn-share-lg:hover .icon-s-rss:after,
+.btn-share-md:hover .icon-s-rss:after,
+.btn-share-sm:hover .icon-s-rss:after,
+.btn-share-xs:hover .icon-s-rss:after {
+    background: #B5B5B5;
+    background: #B5B5B5;
+}
+
 .social a .icon-s-github:after {
     background: #555555;
     background: #333333;
@@ -6008,6 +6040,11 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .social a .icon-s-linkedin:after {
     background: #0077B5;
     background: #0077B5;
+}
+
+.social a .icon-s-rss:after {
+    background: #B5B5B5;
+    background: #B5B5B5;
 }
 
 .post-content li a {
