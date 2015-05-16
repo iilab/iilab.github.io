@@ -25,11 +25,11 @@
 <!--more-->
 <p>Last year after a difficult experience with Jekyll for the Amnesty International Panic Button website, I looked around other approaches to do static website generation and, given I was into JS at the time and like the small modules approach, I settled on metalsmith, which seemed to have a clever design, based on a configurable pipeline, that seemed flexible enough. When I installed it, I did have to hack a few modules to make them do what I wanted, but it seemed straighforward enough. More recently I wanted to do a bit of freshening up on our website, and was looking at building a workflow with css/js concatenation and minimisation. Given how metalsmith was supposed to be this versatile, build pipeline, I thought it would be simple but I got turned off by the lack of clarity, and things started breaking pretty badly when I tried to upgrade modules to latest versions.</p>
 <p>That’s when, in a familiar sequence of events, <a href="http://chriswarbo.net/blog/2014-07-14-nixos.html">well captured</a> as</p>
-<ol style="list-style-type: decimal">
+<ul>
 <li>Try to do something simple</li>
 <li>Fail</li>
 <li>Go down a rabbit hole in an attempt to fix it</li>
-</ol>
+</ul>
 <p>I recursed through a few rabbit holes after my metalsmith/npm woes by trying Hakyll, running into cabal hell, decided to try Nix, saw that it was a bit bleeding edge for OSX, managed to go through that more or less, until I bumped into a compilation problem with the haskellPackages and was helped by the nice folks on the ##nix-darwin IRC channel and pointed to the even more bleeding edge HaskellNG Nix approach which of course, is how deep the rabbit hole goes.</p>
 <h2 id="nix">Nix</h2>
 <p>Nix is a package manager which is also the foundation of a linux distribution called NixOS which uses the philosophy of Nix through and through to provide a well regarded linux distribution. What Nix offers is a reliable way to manage dependencies and escape the various type of hells that the problem creates (DLL hell, cabal hell, the type of spagetthi that systems folk don’t want…). It does this by knowing the complete dependency tree of all the packages it manages. This reminds me of docker’s declarative approach to system configuratio, except that I think that docker’s layered approach at the file system level brings an interesting lower level dimension. In any case, with Nix, several binaries with a different set of dependencies can coexist on your system, and more importantly, use the functional immutable approach to Nix package dependencies in order to keep your environment and yourself health, sane and functional.</p>
@@ -138,17 +138,23 @@ nix-shell -I ~ --command &#39;cabal build&#39;
     <link>https://iilab.org/news/2014-11-26-betterplace-labtogether-video.html</link>
     <description><![CDATA[<p>In this video, Jun Matsushita addresses the role of the <strong>Open and Human Centered process</strong> that pervaded the <a href="/projects/panic-button.html">Panic Button</a> project since its start in 2011.</p>
 <!--more-->
+<p><br></p>
 <center>
-<iframe width="853" height="480" src="https://www.youtube-nocookie.com/embed/n6YS2Fq0hww?showinfo=0" frameborder="0" allowfullscreen>
+<div class="iframeWrapper">
+<iframe width="100%" height="*" src="https://www.youtube-nocookie.com/embed/n6YS2Fq0hww?showinfo=0" frameborder="0" allowfullscreen>
 </iframe>
+</div>
 </center>
+<p><br></p>
 <p>We’ve <a href="/news/2014-11-06-betterplace-labtogether.html">written about the presentation</a> of our work with <a href="http://amnesty.org/">Amnesty International</a> on the <a href="https://panicbutton.io">Panic Button app</a> at the <a href="http://www.betterplace-lab.org/labtogether">Lab Together 2014</a>. The Betterplace Lab is a research lab exploring digital innovations to help people, organizations and companies working in the social sector.</p>
 <p>You can also <a href="https://www.slideshare.net/junjmatsushita/iilab-panic-button-betterplace">see the presentation on slideshare</a> which reviews the major phases of the project and presents some of the outcomes that iilab participated in realising.</p>
 <center>
+<div class="iframeWrapper">
 <iframe src="//www.slideshare.net/slideshow/embed_code/41613390" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen>
 </iframe>
 <div style="margin-bottom:5px">
 <strong> <a href="//www.slideshare.net/junjmatsushita/iilab-panic-button-betterplace" title="iilab - Panic button - betterplace" target="_blank">iilab - Panic button - betterplace</a> </strong> from <strong><a href="//www.slideshare.net/junjmatsushita" target="_blank">Jun Matsushita</a></strong>
+</div>
 </div>
 </center>]]></description>
     <pubDate>Wed, 26 Nov 2014 00:00:00 UT</pubDate>

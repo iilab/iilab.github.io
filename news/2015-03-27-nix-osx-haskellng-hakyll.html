@@ -62,6 +62,9 @@
 								<li class="dropdown">
 									<a href="../news.html" class>News</a>
 								</li>
+								<li class="dropdown">
+									<a href="#footer" class>Contact</a>
+								</li>
 								<!-- <li class="dropdown pull-right searchbox">
 									<a href="#" class="dropdown-toggle js-activated"><i class="icon-search"></i></a>
 									<div class="dropdown-menu">
@@ -132,11 +135,11 @@
                     <!--more-->
 <p>Last year after a difficult experience with Jekyll for the Amnesty International Panic Button website, I looked around other approaches to do static website generation and, given I was into JS at the time and like the small modules approach, I settled on metalsmith, which seemed to have a clever design, based on a configurable pipeline, that seemed flexible enough. When I installed it, I did have to hack a few modules to make them do what I wanted, but it seemed straighforward enough. More recently I wanted to do a bit of freshening up on our website, and was looking at building a workflow with css/js concatenation and minimisation. Given how metalsmith was supposed to be this versatile, build pipeline, I thought it would be simple but I got turned off by the lack of clarity, and things started breaking pretty badly when I tried to upgrade modules to latest versions.</p>
 <p>That’s when, in a familiar sequence of events, <a href="http://chriswarbo.net/blog/2014-07-14-nixos.html">well captured</a> as</p>
-<ol style="list-style-type: decimal">
+<ul>
 <li>Try to do something simple</li>
 <li>Fail</li>
 <li>Go down a rabbit hole in an attempt to fix it</li>
-</ol>
+</ul>
 <p>I recursed through a few rabbit holes after my metalsmith/npm woes by trying Hakyll, running into cabal hell, decided to try Nix, saw that it was a bit bleeding edge for OSX, managed to go through that more or less, until I bumped into a compilation problem with the haskellPackages and was helped by the nice folks on the ##nix-darwin IRC channel and pointed to the even more bleeding edge HaskellNG Nix approach which of course, is how deep the rabbit hole goes.</p>
 <h2 id="nix">Nix</h2>
 <p>Nix is a package manager which is also the foundation of a linux distribution called NixOS which uses the philosophy of Nix through and through to provide a well regarded linux distribution. What Nix offers is a reliable way to manage dependencies and escape the various type of hells that the problem creates (DLL hell, cabal hell, the type of spagetthi that systems folk don’t want…). It does this by knowing the complete dependency tree of all the packages it manages. This reminds me of docker’s declarative approach to system configuratio, except that I think that docker’s layered approach at the file system level brings an interesting lower level dimension. In any case, with Nix, several binaries with a different set of dependencies can coexist on your system, and more importantly, use the functional immutable approach to Nix package dependencies in order to keep your environment and yourself health, sane and functional.</p>
@@ -277,7 +280,7 @@ nix-shell -I ~ --command 'cabal build'
         </div><!-- /.container -->
       </section>
     </main>
-		<footer class="dark-bg">
+		<footer id="footer" class="dark-bg">
 			<div class="container inner">
 				<div class="row">
 
@@ -386,8 +389,7 @@ nix-shell -I ~ --command 'cabal build'
 
 					<div class="col-md-3 col-sm-6 inner">
 						<h4>Stay in touch</h4>
-
-						<p>Receive updates about our projects.</p>
+						<p>On social networks and via rss.</p>
 
 						<div id="share" class="row">
 							<div class="col-sm-2 reset-padding">
@@ -427,6 +429,7 @@ nix-shell -I ~ --command 'cabal build'
 							</div><!-- /.col -->
 																
 						</div>
+						<p>Receive email updates about our projects.</p>
 
 						<form id="newsletter" class="form-inline newsletter" role="form" action="https://iilab.us4.list-manage.com/subscribe/post" method="POST">
 							<input type="hidden" name="u" value="c026c6b05afa24ee6d7fb3626">
@@ -479,7 +482,7 @@ nix-shell -I ~ --command 'cabal build'
             g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
           })();
         </script>
-        <noscript><img src="http://stats.iilab.org/piwik.php?idsite=1" style="border:0;" alt /></noscript>
+        <noscript><p><img src="https://stats.iilab.org/piwik.php?idsite=1" style="border:0;" alt /></p></noscript>
         <script src="../js/scripts.js"></script> 
         
         <!-- OnScroll CSS3 Animations for Modern Browsers and IE10+ -->
