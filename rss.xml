@@ -7,7 +7,373 @@
         <description><![CDATA[iilab - blog feed]]></description>
         <atom:link href="https://iilab.org/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Unknown</lastBuildDate>
-        
+        <lastBuildDate>Sat, 16 May 2015 00:00:00 UT</lastBuildDate>
+        <item>
+    <title>Migrating the iilab site to Hakyll</title>
+    <link>https://iilab.org/news/2015-05-16-hakyll.html</link>
+    <description><![CDATA[<p>I wrote about <a href="2015-03-27-nix-osx-haskellng-hakyll.html">setting up a development environment on OSX for Haskell, using the latest approach to avoid dependency issues with packages</a> and in this next post, I’m sharing about my experience migrating the iilab website to Hakyll.</p>
+<!--more-->]]></description>
+    <pubDate>Sat, 16 May 2015 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2015-05-16-hakyll.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Nix + OSX + HaskellNG = ?</title>
+    <link>https://iilab.org/news/2015-03-27-nix-osx-haskellng-hakyll.html</link>
+    <description><![CDATA[<p>I’ve recently started to look into learning Haskell and have been in the books for a few months, so didn’t yet have to experience the practical side of what comes with the workflow of working with Haskell.</p>
+<p>I decided to try getting my hands dirty with a simple project, migrating the iilab website to the Haskell static site generator <a href="http://jaspervdj.be/hakyll/">Hakyll</a>. In this post I look at how I setup my development environment, and hope to ease the pain for others that are used to the simple <code>npm install</code> style workflows by looking at the latest in how to deal with “cabal hell”.</p>
+<!--more-->
+<p>Last year after a difficult experience with Jekyll for the Amnesty International Panic Button website, I looked around other approaches to do static website generation and, given I was into JS at the time and like the small modules approach, I settled on metalsmith, which seemed to have a clever design, based on a configurable pipeline, that seemed flexible enough. When I installed it, I did have to hack a few modules to make them do what I wanted, but it seemed straighforward enough. More recently I wanted to do a bit of freshening up on our website, and was looking at building a workflow with css/js concatenation and minimisation. Given how metalsmith was supposed to be this versatile, build pipeline, I thought it would be simple but I got turned off by the lack of clarity, and things started breaking pretty badly when I tried to upgrade modules to latest versions.</p>
+<p>That’s when, in a familiar sequence of events, <a href="http://chriswarbo.net/blog/2014-07-14-nixos.html">well captured</a> as</p>
+<ol style="list-style-type: decimal">
+<li>Try to do something simple</li>
+<li>Fail</li>
+<li>Go down a rabbit hole in an attempt to fix it</li>
+</ol>
+<p>I recursed through a few rabbit holes after my metalsmith/npm woes by trying Hakyll, running into cabal hell, decided to try Nix, saw that it was a bit bleeding edge for OSX, managed to go through that more or less, until I bumped into a compilation problem with the haskellPackages and was helped by the nice folks on the ##nix-darwin IRC channel and pointed to the even more bleeding edge HaskellNG Nix approach which of course, is how deep the rabbit hole goes.</p>
+<h2 id="nix">Nix</h2>
+<p>Nix is a package manager which is also the foundation of a linux distribution called NixOS which uses the philosophy of Nix through and through to provide a well regarded linux distribution. What Nix offers is a reliable way to manage dependencies and escape the various type of hells that the problem creates (DLL hell, cabal hell, the type of spagetthi that systems folk don’t want…). It does this by knowing the complete dependency tree of all the packages it manages. This reminds me of docker’s declarative approach to system configuratio, except that I think that docker’s layered approach at the file system level brings an interesting lower level dimension. In any case, with Nix, several binaries with a different set of dependencies can coexist on your system, and more importantly, use the functional immutable approach to Nix package dependencies in order to keep your environment and yourself health, sane and functional.</p>
+<p>A few things that Nix does is make sure dependencies are exact (by using binary hashes in a clever way - which includes all the dependency tree of the binary) and only reuse them when necessary. This means that the nix store holds a range of binary images which might be used by different other binaries and can coexist happily.</p>
+<p>Nix then offers a number of wrapping tools to make these binaries available, for instance, when installing with <code>nix-env -iA nixpkgs.somePackage</code> you’re installing somePackage inside your <strong>user environment</strong> which is in fact symbolic links to the nix store defined in your <code>~/.nix-profile</code> directory.</p>
+<p>When using <code>nix-shell</code> you’re using a <strong>project environment</strong> which might have different dependencies.</p>
+<h2 id="nix-on-osx">Nix on OSX</h2>
+<p>The great thing, given my current dependency on this fruity old laptop and its pretty UX, is that Nix is available on OSX. I took me a little bit of meandering to find out because there are <a href="http://www.chrisjr.org/posts/2014/12/22/nix-osx-haskell/">outdated blog posts</a> on the web (which give workarounds from <strong>before</strong> the OSX changes were marged into the Nix master branch) that <a href="https://nixos.org/wiki/Nix_on_OS_X#Using_Nix_on_10.9_and_10.10">these instructions on the NixOS Wiki about <strong>Using Nix on 10.9 and 10.10</strong></a> actually work just fine. I did bump into a problem because I started installing from the wrong git repo, a number of weird errors came up after switching to the correct instructions which meant that I had to restart from scratch and remove all the nix directories (/nix/store and ˜/.nix-profile).</p>
+<h2 id="haskellng-on-nix">HaskellNG on Nix</h2>
+<p>When I first bumped into <a href="http://article.gmane.org/gmane.linux.distributions.nixos/15513">this post about the new way</a> to do Haskell with Nix, I thought : “Oh, this looks great but very bleeding edge and I’m down several rabbit holes already so let’s look at it later”. So I went my merry way installing following <a href="https://nixos.org/wiki/Haskell">the official Nix instructions on the wiki</a>. But then after installing the Haskell toolkit (apparently the <a href="https://www.mail-archive.com/nix-dev@lists.science.uu.nl/msg13622.html">Nix crowd is too cool for the Haskell Platform</a>) I found out that the Nix tribe on OSX seemed to have already left the old ways behind and migrated to HaskellNG. I found out because I ran into this error</p>
+<pre><code>installing ‘haskell-hakyll-ghc7.8.4-4.6.1.1-shared’
+error: Package ‘util-linux-2.26’ in ‘/../dev/nixpkgs/pkgs/os-specific/linux/util-linux/default.nix:54’ is not supported on ‘x86_64-darwin’, refusing to evaluate.</code></pre>
+<h2 id="step-by-step">Step by step</h2>
+<p>To recap, here’s what it took to set things up: - following <a href="https://nixos.org/wiki/Nix_on_OS_X#Using_Nix_on_10.9_and_10.10">these steps to install Nix on OSX 10.10</a> - adapting <a href="http://thread.gmane.org/gmane.linux.distributions.nixos/15035/focus=15161">these steps</a> to haskellng - and <a href="http://wiki.ocharles.org.uk/Nix">this description of the haskell cabal workflow</a>.</p>
+<h3 id="install-nix-on-osx">Install Nix on OSX</h3>
+<p>A <a href="https://nixos.org/wiki/Nix_on_OS_X#Using_Nix_on_10.9_and_10.10">slightly more concise version of the official Nix wiki instructions</a>. ** I’d recommend heading over there for the latest!!! **</p>
+<pre><code>$ xcode-select --install
+$ sudo xcode-select --switch /Library/Developer/CommandLineTools
+$ sudo clang  --version
+$ curl https://nixos.org/nix/install | sh
+$ . $HOME/.nix-profile/etc/profile.d/nix.sh$ git clone https://github.com/NixOS/nixpkgs.git
+$ nix-channel --remove nixpkgs
+$ cd ~/.nix-defexpr
+$ rm -rf *
+$ ln -s /path/of/nixpkgs/clone nixpkgs</code></pre>
+<pre><code>$ sudo mkdir /etc/nix</code></pre>
+<p>Create a <code>/etc/nix/nix.conf</code> file with</p>
+<pre><code>binary-caches = http://cache.nixos.org/ </code></pre>
+<p>Update the .bashrc</p>
+<pre><code>export NIX_PATH=/Users/jun/dev/nixpkgs:nixpkgs=/Users/jun/dev/nixpkgs
+export NIX_GHC_VERSION=$(ghc --numeric-version)
+export NIX_GHC=&quot;$HOME/.nix-profile/bin/ghc&quot;
+export NIX_GHCPKG=&quot;$HOME/.nix-profile/bin/ghc-pkg&quot;
+export NIX_GHC_DOCDIR=&quot;$HOME/.nix-profile/share/doc/ghc/html&quot;
+export NIX_GHC_LIBDIR=&quot;$HOME/.nix-profile/lib/ghc-${NIX_GHC_VERSION}&quot;</code></pre>
+<p>Source this</p>
+<pre><code>$ source ~/.bashrc</code></pre>
+<h2 id="configure-nix-for-haskell">Configure Nix for Haskell</h2>
+<p>Create a ~/.nixpkgs director</p>
+<p>Create a <code>~/.nixpkgs/config.nix</code> file which will be read each time you use nix</p>
+<pre><code>{
+  packageOverrides = super: let self = super.pkgs; in
+  {
+    haskellEnv = self.haskellngPackages.ghcWithPackages (p: with p; [
+      async attoparsec case-insensitive fgl GLUT GLURaw haskell-src
+      hashable html HTTP HUnit mtl network OpenGL OpenGLRaw parallel
+      parsec QuickCheck random regex-base regex-compat regex-posix split stm
+      syb text transformers unordered-containers vector /*xhtml*/ zlib      
+      # tools
+      cabal-install
+      ghc-mod
+      # xmonad xmonad-contrib xmonad-extras xmobar
+      # haskintex
+    ]);
+
+    haskellPackages = super.haskellPackages.override {
+      extension = self: super: {
+        abcnotation = self.callPackage ./abcnotation.nix {};
+        prettify = self.callPackage ./prettify.nix {};
+      };
+    };
+  };
+}</code></pre>
+<p>Install the haskellEnv with</p>
+<pre><code>$ nix-env -iA nixpkgs.haskellEnv</code></pre>
+<h2 id="the-workflow">The workflow</h2>
+<p>nix-shell</p>
+<pre><code>$ nix-shell --pure</code></pre>
+<p>This blocks out all other possible packages from the user environment and only uses the ones defined on a project basis (i.e. in the default.nix and shell.nix files in the current project folder).</p>
+<p>Using <code>cabal2nix</code> helps create a <code>shell.nix</code> environment with the right dependencies.</p>
+<pre><code>$ cabal2nix --shell . &gt; shell.nix</code></pre>
+<p>When running this the first time I had an error about the nixpkgs directory and had to source ~/.bashrc with the proper $NIX_PATH variable.</p>
+<pre><code>$ nix-shell -I ~ --command &#39;cabal configure&#39;</code></pre>
+<p>I got an error message about a nonfree license. Looking more into it, it’s my project that’s the culprot: the hakyll cabal package isn’t declaring a license. Wow, never got a build tool tell me that before. But I guess it makes a whole lot of sense, and it led me to <a href="https://github.com/haskell/cabal/issues/847#issuecomment-87065077">ponder about</a> what license a website generator should have, is it content or is it code?</p>
+<p>I only spent a very short amount of time using cabal, and it seems that with the latest version and <code>cabal sandbox</code> things improved significantly. Cabal sandboxes allow several version of libraries to co-exist. But the time it took for spinning up a sandbox for a large project is quite long and in the worst case scenario, when dependencies reach into packages that are in the Haskell distribution (like cabal itself) then things start to be quite difficult. What Nix promises is that everything is separated by default, and when it’s safe to share packages (same hash of the whole dependency tree) then they won’t be rebuilt, meaning less compilation when its not needed! Nix still offers ways to control dependencies in a very granular way (what seems to be called deep overrides).</p>
+<p>Time to cabal build:</p>
+<pre><code>$ cabal build</code></pre>
+<p>Note that this should be doable from the user environment (i.e. without the nix-shell command) except that it fails with this error:</p>
+<pre><code>ghc-7.8.4/include/Stg.h:65:10:
+     fatal error: &#39;math.h&#39; file not found
+#include &lt;math.h&gt;</code></pre>
+<p>Oops, seems like <a href="https://github.com/NixOS/nixpkgs/issues/6390">this thread</a> says that things don’t quite work the way it’s supposed to on OSX (because of the clang compiler). The option seems to be to rebuild everything with <code>export NIX_CFLAGS_COMPILE=&quot;-idirafter /usr/include&quot;</code>.</p>
+<p>Instead I give a shot to running cabal (therefore ghc) from within the nix-shell and tada, it works:</p>
+<pre><code>$ nix-shell -I ~ --command &#39;cabal build&#39;
+Building iilab-org-hakyll-0.1.0.0...
+Preprocessing executable &#39;site&#39; for iilab-org-hakyll-0.1.0.0...
+[1 of 1] Compiling Main             ( site.hs, dist/build/site/site-tmp/Main.o)
+Linking dist/build/site/site ...</code></pre>
+<p>So here it is, I created a simple <code>rebuild.sh</code> script to rebuild the Hakyll binary and run it with the <code>clean</code> and <code>watch</code> arguments:</p>
+<pre><code>#!/bin/bash
+set -e
+nix-shell -I ~ --command &#39;cabal build&#39;
+./site clean
+./site watch</code></pre>
+<p>When needed I can also run the repl with</p>
+<pre><code>$ nix-shell -I ~ --command &#39;cabal repl&#39;</code></pre>
+<h2 id="epilogue">Epilogue</h2>
+<p>The tooling for Haskell development seems to be evolving fast and progressively making things easier. However the reality is that it is still far from being as simple as other development environments and takes quite a lot of work to setup properly. I also realise that I’m a bit worried about trying to set that up again on another machine if I have to. The folks on IRC were very helpful though, especially <code>henrytill</code> who offered to review this post.</p>
+<p>I’ll share more about my experience with using Hakyll and migrating from metalsmith in a next post but the iilab site is now generated with Hakyll and the <a href="https://github.com/iilab/iilab.org-hakyll">source code is of course available on github</a>.</p>]]></description>
+    <pubDate>Fri, 27 Mar 2015 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2015-03-27-nix-osx-haskellng-hakyll.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Panic Button @ Labtogether</title>
+    <link>https://iilab.org/news/2014-11-26-betterplace-labtogether-video.html</link>
+    <description><![CDATA[<p>In this video, Jun Matsushita addresses the role of the <strong>Open and Human Centered process</strong> that pervaded the <a href="/projects/panic-button.html">Panic Button</a> project since its start in 2011.</p>
+<!--more-->
+<center>
+<iframe width="853" height="480" src="https://www.youtube-nocookie.com/embed/n6YS2Fq0hww?showinfo=0" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p>We’ve <a href="/news/2014-11-06-betterplace-labtogether.html">written about the presentation</a> of our work with <a href="http://amnesty.org/">Amnesty International</a> on the <a href="https://panicbutton.io">Panic Button app</a> at the <a href="http://www.betterplace-lab.org/labtogether">Lab Together 2014</a>. The Betterplace Lab is a research lab exploring digital innovations to help people, organizations and companies working in the social sector.</p>
+<p>You can also <a href="https://www.slideshare.net/junjmatsushita/iilab-panic-button-betterplace">see the presentation on slideshare</a> which reviews the major phases of the project and presents some of the outcomes that iilab participated in realising.</p>
+<center>
+<iframe src="//www.slideshare.net/slideshow/embed_code/41613390" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen>
+</iframe>
+<div style="margin-bottom:5px">
+<strong> <a href="//www.slideshare.net/junjmatsushita/iilab-panic-button-betterplace" title="iilab - Panic button - betterplace" target="_blank">iilab - Panic button - betterplace</a> </strong> from <strong><a href="//www.slideshare.net/junjmatsushita" target="_blank">Jun Matsushita</a></strong>
+</div>
+</center>]]></description>
+    <pubDate>Wed, 26 Nov 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-11-26-betterplace-labtogether-video.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Open and Human Centric technology - Presenting Panic Button at Labtogether</title>
+    <link>https://iilab.org/news/2014-11-06-betterplace-labtogether.html</link>
+    <description><![CDATA[<p>Betterplace Lab invited iilab to present our work with <a href="http://amnesty.org/">Amnesty International</a> on the <a href="https://panicbutton.io">Panic Button app</a> at the <a href="http://www.betterplace-lab.org/labtogether">Lab Together 2014</a>.</p>
+<p>The main focus of my presentation was the role of the <strong>Open and Human Centered process</strong> that pervaded the project since it started in 2011.</p>
+<!--more-->
+<p>The Betterplace Lab is a research lab exploring digital innovations to help people, organizations and companies working in the social sector. At the Lab Together this year, they held a discussion on digital privacy with our friends <a href="https://www.tacticaltech.org/">Tactical Technology Collective</a> and the new Data and Politics project lead Fieke Jansen, panels on Crowdfinancing and Productive failure, and presentations on digital relief trends.</p>
+<iframe src="//www.slideshare.net/slideshow/embed_code/41613390" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen>
+</iframe>
+<div style="margin-bottom:5px">
+<strong> <a href="//www.slideshare.net/junjmatsushita/iilab-panic-button-betterplace" title="iilab - Panic button - betterplace" target="_blank">iilab - Panic button - betterplace</a> </strong> from <strong><a href="//www.slideshare.net/junjmatsushita" target="_blank">Jun Matsushita</a></strong>
+</div>
+<p>Panic Button didn’t come fully formed out of the <a href="https://openideo.com/challenge/amnesty/realisation/">Open Ideo open innovation process</a>, that it took a lot of iterations in prototyping and later in implementation to get to <a href="https://panicbutton.io">where the application is today</a>.</p>
+<p>Also, Open Source is an useful approach to improve the sustainability of a social impact project. It allowed iilab to pick up where Toughtworks had left, and will allow other developers to get onboard in the future. A question from the audience correctly pointed out that there are other factors to be able to support the <a href="http://oss-watch.ac.uk/resources/howtobuildcommunity">emergence of an open source community around a project</a> and Panic Button is still in an incubation phase with a few <a href="https://github.com/iilab/PanicButton/graphs/contributors">contributors</a> including paid ones.</p>
+<p>Crucially we used an <a href="https://github.com/iilab/PanicButton-Design">Open Design approach</a> which included the use of <a href="https://github.com/iilab/PanicButton-Design/tree/master/Archive/5_Prototype_v2/Prototype%20v2%20Paper%20wireframes">paper based prototypes</a> and a <a href="https://github.com/iilab/PanicButton-Design/tree/master/Usability%20Testing">structured method to collect the results</a> of user testing. We gathered security experts, also with a human centric and <a href="https://tacticaltech.org/holistic-security">holistic security</a> approach to evaluate risks and feed into the <a href="https://github.com/iilab/PanicButton/blob/master/docs/SECURITY.md">security design and documentation</a> of Panic Button.</p>
+<p>I wish there would have been more time for interaction with the audience, but the feedback on twitter was good so I hope the presentation provided some food for thought.</p>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p>
+<a href="https://twitter.com/iilab"><span class="citation">@iilab</span></a> presents <a href="https://twitter.com/amnesty"><span class="citation">@amnesty</span></a> <a href="https://twitter.com/hashtag/panicbutton?src=hash">#panicbutton</a> app. Seems like model partnership &amp; process for this open source project. <a href="https://twitter.com/OpenStateBER"><span class="citation">@OpenStateBER</span></a> <a href="https://twitter.com/hashtag/labtogether?src=hash">#labtogether</a>
+</p>
+— Anja Adler (<span class="citation">@digitalnatural</span>) <a href="https://twitter.com/digitalnatural/status/530410525549924353">November 6, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+<p>We’re hoping to share the video soon, but if you have any thoughts so far, please get in touch in the comments or <a href="https://twitter.com/intent/tweet?text=via+%40iilab+http%3A%2F%2Fbit.ly%2F11sHEgv+%23labtogether&amp;source=clicktotweet&amp;related=clicktotweet">with twitter</a> via <span class="citation">@iilab</span> #labtogether. <br> <br></p>]]></description>
+    <pubDate>Thu, 06 Nov 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-11-06-betterplace-labtogether.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>How to make a non-evil IoT - Open Droplet at LOTE4</title>
+    <link>https://iilab.org/news/2014-11-02-open-droplet-lote4.html</link>
+    <description><![CDATA[<p>Last week we had the opportunity to take Open Droplet to LOTE4: The Stewardship. Open Droplet was one of the five projects looking at physical assets, and the only one that involved Internet of Things. IoT got a pretty bad vibe going from the get-go because of the associated scary privacy and control problems. (Alberto gave me a steer to <a href="http://kryakk-catalogue.prokhorovfund.ru/the-epic-struggle-for-the-internet-of-things/">Bruce Sterling’s “The Epic Struggle for the Internet of Things”</a> , which goes a good way to explaining the issues).</p>
+<!--more-->
+<p>For session notes, see the Open Droplet session here: <a href="https://lote4.hackpad.com/Stewarding-Physical-Assets-EVxm8c6PyiU"></a>https://lote4.hackpad.com/Stewarding-Physical-Assets-EVxm8c6PyiU</p>
+<p>The session was interesting. We had an involved discussion about other aspects of the project, from the sensor design and usability, to how best to convey information to the user.</p>
+<p>Some useful new suggestions:</p>
+<ul>
+<li>partner with hotels to raise awareness of this approach</li>
+<li>consider representing the total household use</li>
+</ul>
+<p>There was reiteration of the importance of these considerations:</p>
+<ul>
+<li>open data and privacy</li>
+<li>comparison as a motivator</li>
+<li>proper use by understanding the water infrastructure</li>
+<li>facilitating conversation around community stewardship of water, including water harvesting</li>
+</ul>
+<p>However, we didn’t have that much time to discuss the IoT issues, which would have been great to explore with the EdgeRyders community. Internet of Things is happening, and could be very useful in terms of facilitating stewardship of physical assets. What we’re aiming for with Open Droplet is to create a device and system that helps connect people with water, an increasingly stressed resource, so that we can take better care of it as individuals and communities - and find new ways to do so. Part of how we want to do that is by following the principles of an <a href="https://docs.google.com/document/d/1yZAsNaesDocqqtkFgucbFS_zE4tDP1Jsfszsvls7Yuc/edit">Open Internet of Things</a>.</p>
+<p>I would love to extend the dialogue around these issues, and to have explored more the role of Internet of Things in creating social change, and looking at how sensing technologies can be tools to generate social and paradigmatic change. Due to timing issues the unconference session “<a href="https://lote4.hackpad.com/How-do-we-create-a-non-evil-IoT-X5pTvtOF8ma">How to make a non-evil IoT</a>” didn’t happen. We were going to look at building on work to make Open Hardware solutions that explicitly avoid making Big Data for the sake of it. How do you quantify without compromising people? I’d like to continue that discussion here and on the EdgeRyders platform, looking at these and other questions:</p>
+<ul>
+<li>Expanding IoT - What data do we need to have from city and infrastructure providers to give useful context to individual water use?<br /></li>
+<li>How do we responsibly approach the individual’s rights to their data</li>
+<li>How do requirements for water stewardship vary around the globe? How do we accommodate these differences?</li>
+<li>How do we facilitate community water stewardship through interface and sensor design?</li>
+</ul>
+<h2 id="first-meeting-with-the-ucl-students">First meeting with the UCL Students</h2>
+<p>Last month I had the pleasure to meet up in person with the students from Sarah Bell’s MSc Environmental Systems Engineering at UCL. Our team consists of Florian Abiteboul, Shanshan Tang, Cecilia Li, and Shibei Cheng and Anita Ponnathpore and it was a great first meeting. Having introduced the project, I’ve asked them to start off with the background research for a protocol to rapidly categorise cities in terms of their water infrastructure in order to see where Open Droplet’s approach might be most effective. When we meet this month, we’ll be handing over plans from the industrial research so that the students can then test calibration and flow detection in UCL’s toilets and showers.</p>]]></description>
+    <pubDate>Sun, 02 Nov 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-11-02-open-droplet-lote4.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Open Droplet features on Serpentine Gallery's extinct.ly platform</title>
+    <link>https://iilab.org/news/2014-10-18-open-droplet-serpentine-extinctly.html</link>
+    <description><![CDATA[<p>“the spectre of extinction looms over the ways in which we understand our being in the world today.”</p>
+<p>At London’s Serpentine Gallery this weekend thinkers, scientists and artists are coming together to focus on this ever present spectre at the <a href="http://www.serpentinegalleries.org/exhibitions-events/extinction-marathon">Extinction Marathon</a>.</p>
+<!--more-->
+<p>Understanding that it is only through collective action that we might avoid a disaster on a global scale, the gallery has commissioned <a href="http://extinct.ly">extinct.ly</a>, an online platform to act as a resource for researchers and those who wish to effect change.</p>
+<p>We are honoured that Open Droplet has been picked to appear alongside other excellent projects such as <a href="http://hack4good.io/">hack4good</a> and our project partner <a href="https://iilab.org/projects/open-oil-framework.html">Open Oil</a> as the first projects to feature in extinct.ly’s launch.</p>
+<p>On <a href="http://www.extinct.ly/casestudies/#open-droplet">Open Droplet’s page on extinct.ly</a> you can experience the near-future scenario that we have crafted around water scarcity.</p>
+<p><a href="http://www.extinct.ly/casestudies/#open-droplet"><img src="/images/news/droplet-extinctly.png" /></a></p>]]></description>
+    <pubDate>Sat, 18 Oct 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-10-18-open-droplet-serpentine-extinctly.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Deploying our Electronic Medical Records solution in DRC</title>
+    <link>https://iilab.org/news/2014-10-11-drc-ltfhc.html</link>
+    <description><![CDATA[<p>We recently came back from a field deployment in the Democratic Republic of Congo. We installed 6 Electronic Medical Record (EMR) solutions and another 5 radio sites.</p>
+<!--more-->
+<p>The aim is to support health care workers in ultra rural settings to manage their medical records in a modern way and be able to report back to their distric hospital by transferring data over HF radio instead of the difficult travel needed currently.</p>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p lang="en" dir="ltr">
+1/ Deploying our Electronic Medical Records solution in DRC takes an unusual commute to work… <a href="https://twitter.com/TeamRubicon"><span class="citation">@TeamRubicon</span></a> <a href="https://twitter.com/LTFHC"><span class="citation">@LTFHC</span></a> <a href="http://t.co/uAI7TPmrcZ">pic.twitter.com/uAI7TPmrcZ</a>
+</p>
+— jmatsushita (<span class="citation">@jmatsushita</span>) <a href="https://twitter.com/jmatsushita/status/520835066264846336">October 11, 2014</a>
+</blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p lang="en" dir="ltr">
+2/ To be effective, in DRC, the iilab's server rooms are portable to allow for last minute updates and testing <a href="https://twitter.com/LTFHC"><span class="citation">@LTFHC</span></a> <a href="http://t.co/w71cSTI3uV">pic.twitter.com/w71cSTI3uV</a>
+</p>
+— jmatsushita (<span class="citation">@jmatsushita</span>) <a href="https://twitter.com/jmatsushita/status/520873447732563968">October 11, 2014</a>
+</blockquote>
+</center>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p lang="en" dir="ltr">
+3/ This allows places like the Head Office of the Health Zone in Kalemie, to receive periodic medical reports <a href="https://twitter.com/LTFHC"><span class="citation">@LTFHC</span></a> <a href="http://t.co/HVRrP9jc1o">pic.twitter.com/HVRrP9jc1o</a>
+</p>
+— jmatsushita (<span class="citation">@jmatsushita</span>) <a href="https://twitter.com/jmatsushita/status/520939909347938305">October 11, 2014</a>
+</blockquote>
+</center>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p lang="en" dir="ltr">
+5/ …using HF radio modems with uucp a technology that was used at the very beginning of the internet. <a href="https://twitter.com/LTFHC"><span class="citation">@LTFHC</span></a> <a href="http://t.co/NrxTNpnYSB">pic.twitter.com/NrxTNpnYSB</a>
+</p>
+— jmatsushita (<span class="citation">@jmatsushita</span>) <a href="https://twitter.com/jmatsushita/status/521197376242216960">October 12, 2014</a>
+</blockquote>
+</center>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p lang="en" dir="ltr">
+6/ … with modern deployment (<a href="https://twitter.com/ansible"><span class="citation">@ansible</span></a>) <a href="http://t.co/o5ys9viO3Q">http://t.co/o5ys9viO3Q</a> and web app (<a href="https://twitter.com/CouchDB"><span class="citation">@couchdb</span></a>) map reducing reports in JS. <a href="http://t.co/Q69FqcaPvT">http://t.co/Q69FqcaPvT</a>
+</p>
+— jmatsushita (<span class="citation">@jmatsushita</span>) <a href="https://twitter.com/jmatsushita/status/521235835661086720">October 12, 2014</a>
+</blockquote>
+</center>
+<center>
+<blockquote class="twitter-tweet" lang="en">
+<p lang="en" dir="ltr">
+7/ …so health care workers spend less time reporting and more with patients and using records that improve practice <a href="http://t.co/bjTc70fN0m">pic.twitter.com/bjTc70fN0m</a>
+</p>
+— jmatsushita (<span class="citation">@jmatsushita</span>) <a href="https://twitter.com/jmatsushita/status/521302342885715969">October 12, 2014</a>
+</blockquote>
+</center>]]></description>
+    <pubDate>Sat, 11 Oct 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-10-11-drc-ltfhc.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Open Droplet Experiments: Silicon Casing</title>
+    <link>https://iilab.org/news/2014-09-22-open-droplet-enclosure.html</link>
+    <description><![CDATA[<p>If you put some electronics in your bathroom, you want them to be waterproof.</p>
+<p>We ran some tests last week on making Open Droplet shower safe, to stop water from getting in and playing havoc with the carefully constructed insides.</p>
+<!--more-->
+<p>These first tests, shown in the video below, see us encasing Open Droplet in silicon, and investigating how the microphone responds to being encased and what effect it has on the LEDs.</p>
+<div class="video-container post-media">
+<iframe src="//player.vimeo.com/video/106799877?color=506a85" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+<p>
+<a href="http://vimeo.com/106799877">Open Droplet for Smart and Stress Resilient Cities</a> from <a href="http://vimeo.com/iilab">iilab</a> on <a href="https://vimeo.com">Vimeo</a>.
+</p>
+</div>
+<p>Technical info: For this test we’re using low grade silicon (<a href="http://www.silikonfabrik.de/product_info.php?info=p134_HANSA-Silikon-HS620---0-9-kg.html">HS620 Silikon</a> + catalyst) with a blue pigment, and we measured proportions by weight. We coated the moulds with a wax separator (<a href="http://www.silikonfabrik.de/product_info.php?info=p14_Trennspray--500ml.html">Trennmittel</a>) so the silicon didn’t stick.</p>
+<p>Next steps: * Modifying the gain of the microphone preamp to compensate for the silicon’s attenuation. * Including very low consumption LEDs on the PCB. * Add wax to make it easier to remove the silicon casing without damaging the sensor. * Test with higher grade silicon. * <a href="https://droplet.hackpad.com/Open-Droplet-Form-Design-km42HJk4XU1">Design the casing shape</a> for CNC milling of the mould. * Look into wireless charging. * Measure the heat generated by the power system.</p>]]></description>
+    <pubDate>Mon, 22 Sep 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-09-22-open-droplet-enclosure.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Partnership and proof of concept</title>
+    <link>https://iilab.org/news/2014-09-12-partnership-proof-of-concept.html</link>
+    <description><![CDATA[<p>We’re happy to reveal a couple of marvellous videos for you.</p>
+<p>iilab is partnering on Open Droplet with <a href="http://www.resurgence.io/">Resurgence</a>, an organisation based in London’s <a href="http://theodi.org/">Open Data Institute (ODI)</a> and focussing on creating smart, disaster resilient cities. We are hoping to work together to leverage the Internet of Things to make water measurement more open, collaborative and affordable.</p>
+<!--more-->
+<p>Off the back of some of our <a href="https://iilab.org/news/2014-09-10-water-water-everywhere.html">preliminary research</a>, one key component of what we are planning to do with Open Droplet is to provide context to the data collected by individual sensors. This will involve a two-way flow of data between individuals, and utilities and public bodies who are responsible for the water infrastructure. This turns Open Droplet into more than just a water sensor - it’s a means of understanding how individual water flows fit within the overall water infrastructure.</p>
+<p>We’ve put together a video to present the overall vision of the project in terms of environment and resilience. Here it is, with thanks to Mark Harvey from Resurgence, Open Videographer wizard <a href="http://www.cameralibre.cc/">Sam Muirhead</a>, and Alex Shure, Jun Matsushita and (ahem, the very camera shy) yours truly from the Open Droplet team.</p>
+<div class="video-container post-media">
+<iframe src="//player.vimeo.com/video/105888507?color=506a85" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+<p>
+<a href="http://vimeo.com/105888507">Open Droplet for Smart and Stress Resilient Cities</a> from <a href="http://vimeo.com/iilab">iilab</a> on <a href="https://vimeo.com">Vimeo</a>.
+</p>
+</div>
+<p>We’d also like to show off the progress we’ve made on Open Droplet hardware development. Alex has created this great video of his work, showing how he’s now got the microphone registering low frequency noise (which should correspond to shower noise) and measuring that noise for as long is it detects it. Here’s a demonstration of the proof of concept for the Open Droplet design.</p>
+<div class="video-container post-media">
+<iframe src="//player.vimeo.com/video/105888510?color=506a85" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+<p>
+<a href="http://vimeo.com/105888510">Open Droplet Technology Update</a> from <a href="http://vimeo.com/iilab">iilab</a> on <a href="https://vimeo.com">Vimeo</a>.
+</p>
+</div>]]></description>
+    <pubDate>Fri, 12 Sep 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-09-12-partnership-proof-of-concept.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
+    <title>Water, water everywhere but not a drop to drink</title>
+    <link>https://iilab.org/news/2014-09-10-water-water-everywhere.html</link>
+    <description><![CDATA[<p>Our water demands are growing. We are reaching a point where many major cities will be suffering water stress within years. London, the world’s 15th most water-stressed city, will have a deficit of over <a href="http://www.london.gov.uk/sites/default/files/Enabling%20Infrastructure.pdf">59 million litres next year and a projected 359 million litres by 2035</a>.</p>
+<!--more-->
+<p>But where do these water shortages come from? After all, there’s a whole lot of water on the planet - about <a href="http://earthobservatory.nasa.gov/Features/Water/">1.39 billion cubic kilometers</a>. But around 97 per cent is that saline solution we love to sail on, and another 2.5 per cent is fresh but frozen. That leaves us with only 0.5 per cent to available not only for us humans, but for the rest of our ecosystem as well.</p>
+<p>This <a href="http://www.unwater.org/downloads/Water_facts_and_trends.pdf">report from UN Water</a> does a great job of explaining some of the issues with water availability, which range from low rainfall to overuse of aquifers, and that fact that 60 per cent of that usable fresh water is located in just 9 countries on Earth. That’s Brazil, Russia, China, Canada, Indonesia, U.S., India, Columbia and the Democratic Republic of Congo. Incidentally, DRC’s contribution here is down to Lake Tanganyika, the location of <a href="https://iilab.org/projects/electronic-medical-record.html">iilab’s Electronic Medical Records second deployment with Lake Tanganyika Floating Health Clinic</a>.</p>
+<p>In fact, if you look at the UN Water report, the rain-ridden UK in general is looking fairly healthy in terms of water availability - especially with predictions of <a href="http://www.cru.uea.ac.uk/documents/421974/1295957/Info+sheet+%2315.pdf/8b8457b7-7bd2-49fc-888a-9b3f6785a40e">increasing rainfall in autumn, winter and spring due to climate change</a>, offset, though, by decreased precipitation in the summer. London’s water shortages arise because the city’s demands, especially given increases in population, will far outstrip the capacity of the Thames catchment river and groundwater flows to supply them, such that <a href="http://www.bbc.com/news/uk-england-london-22479216">Thames Water is planning to redevelop their Deephams facility in Enfield to turn sewerage into drinking water</a> to meet increasing needs.</p>
+<p>This rather points to one of the big problems for humans and water consumption: water availability is less about volume and more about flow. There’s still quite a vast amount of water, but unfortunatly a lot of it isn’t where we need it to be for us to use.</p>
+<p><img src="/images/news/droplet-un-goodbadnews.png" alt="UN Report" /> <em>UN Water report</em></p>
+<p>Another great example is the problems in Germany around insufficient flow in the water pipes. It is recommended that for water to be safe to consume, <a href="http://download.springer.com/static/pdf/287/bfm%3A978-3-642-29546-1%2F1.pdf?auth66=1409323289_0857c0b24bf6c5352e0f733eb493531c&amp;ext=.pdf">the complete volume of water in a pipe system has to flow through - or exchange - within 7 days (linked document is a pdf in German)</a>.</p>
+<p>Water exchange is a real problem in Germany, where <a href="http://www.dw.de/german-water-conservation-impairs-sewage-treatment/a-4582438">stagnation in pipes has been seen to be a real problem requiring chemical-based remediation</a>. There is in fact some argument over whether cutting down on water usage is the best plan for Germany as remediation of stagnant water can lead either to pollution or deliberate waste of water. Although the problem arises from outdated infrastructure, this would be tricky to fix even if reduced water usage in the country were an absolute must.</p>
+<p>In practical terms, then, it’s important to look at reducing water usage in the context of an area’s infrastructure and water availability. As part of my work on Open Droplet, I’m going to be researching whereabouts Open Droplet would be most useful, and what kind of other data - in terms of infrastructure, direct sensor data, community data and so on - we need to have at our fingertips to put our domestic water use in context.</p>
+<figure>
+<div class="row">
+<div class="col-sm-6 col-sm-push-6">
+<img src="/images/news/droplet-led.png" alt="">
+</div>
+<div class="col-sm-6 col-sm-pull-6">
+<figcaption>
+<h4>
+In the meantime.
+</h4>
+<p>
+Alex in our engineering team has been beavering away on the system, working on getting a visual response system working. Using a strip of LEDs (ws2812b from World Semiconductors) along with an open source library (NeoPixel from Adafruit), he’s got them disco dancing at the press of a button. The next step is coupling them to the microphone system he and Sam already got running, so that they visualise the surrounding sound.
+</p>
+</figcaption>
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</figure>]]></description>
+    <pubDate>Wed, 10 Sep 2014 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2014-09-10-water-water-everywhere.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+
     </channel>
 </rss>
