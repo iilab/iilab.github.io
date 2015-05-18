@@ -225,7 +225,7 @@ $ ln -s /path/of/nixpkgs/clone nixpkgs</code></pre>
 #include &lt;math.h&gt;</code></pre>
 <p>Oops, seems like <a href="https://github.com/NixOS/nixpkgs/issues/6390">this thread</a> says that things don’t quite work the way it’s supposed to on OSX (because of the clang compiler). The option seems to be to rebuild everything with <code>export NIX_CFLAGS_COMPILE=&quot;-idirafter /usr/include&quot;</code>.</p>
 <p>Instead I give a shot to running cabal (therefore ghc) from within the nix-shell and tada, it works:</p>
-<pre><code>$ nix-shell -I ~ --command 'cabal build'
+<pre><code>$ nix-shell --command 'cabal build'
 Building iilab-org-hakyll-0.1.0.0...
 Preprocessing executable 'site' for iilab-org-hakyll-0.1.0.0...
 [1 of 1] Compiling Main             ( site.hs, dist/build/site/site-tmp/Main.o)
@@ -234,11 +234,11 @@ Linking dist/build/site/site ...</code></pre>
 <p>So here it is, I created a simple <code>rebuild.sh</code> script to rebuild the Hakyll binary and run it with the <code>clean</code> and <code>watch</code> arguments:</p>
 <pre><code>#!/bin/bash
 set -e
-nix-shell -I ~ --command 'cabal build'
+nix-shell --command 'cabal build'
 ./site clean
 ./site watch</code></pre>
 <p>When needed I can also run the repl with</p>
-<pre><code>$ nix-shell -I ~ --command 'cabal repl'</code></pre>
+<pre><code>$ nix-shell --command 'cabal repl'</code></pre>
 <p>If I add some Haskell imports and need to update the dependencies, I can do so in the cabal file and regenerate the shell.nix file with <code>cabal2nix --shell . &gt; shell.nix</code>.</p>
 <h2 id="epilogue">Epilogue</h2>
 <p>The tooling for Haskell development seems to be evolving fast and progressively making things easier for juggling with dependencies. However the reality is that it is still far from being as simple as other development environments and takes quite a lot of work to setup properly. I also realise that I’m a bit worried about trying to set that up again on another machine if I have to. I do think that the benefits definitely outweigh the drawbacks, and that investing the time to set this up will result in peace of mind when wanting to try out the bleeding edge of Haskell without worrying about breaking other projects because of dependencies. The folks on IRC were very helpful, especially Henry Till (<code>henrytill</code> on IRC) who helped review this post and I recommend heading to the <code>##nix-darwin</code> IRC Channel on freenode if you run into problems.</p>

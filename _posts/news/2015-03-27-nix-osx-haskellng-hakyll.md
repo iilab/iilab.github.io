@@ -157,7 +157,7 @@ Oops, seems like [this thread](https://github.com/NixOS/nixpkgs/issues/6390) say
 Instead I give a shot to running cabal (therefore ghc) from within the nix-shell and tada, it works:
 
 ```
-$ nix-shell -I ~ --command 'cabal build'
+$ nix-shell --command 'cabal build'
 Building iilab-org-hakyll-0.1.0.0...
 Preprocessing executable 'site' for iilab-org-hakyll-0.1.0.0...
 [1 of 1] Compiling Main             ( site.hs, dist/build/site/site-tmp/Main.o)
@@ -171,7 +171,7 @@ So here it is, I created a simple ```rebuild.sh``` script to rebuild the Hakyll 
 ```
 #!/bin/bash
 set -e
-nix-shell -I ~ --command 'cabal build'
+nix-shell --command 'cabal build'
 ./site clean
 ./site watch
 ```
@@ -179,7 +179,7 @@ nix-shell -I ~ --command 'cabal build'
 When needed I can also run the repl with 
 
 ```
-$ nix-shell -I ~ --command 'cabal repl'
+$ nix-shell --command 'cabal repl'
 ```
 
 If I add some Haskell imports and need to update the dependencies, I can do so in the cabal file and regenerate the shell.nix file with ```cabal2nix --shell . > shell.nix```.

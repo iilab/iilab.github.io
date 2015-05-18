@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+                <!-- Meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="description" content>
+        <meta name="author" content>
+
+        <title>iilab | Solving the false alert bug in ‘Panic Button’</title>
+
+        <link href="../css/style.css" rel="stylesheet">
+        
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="../favicon.ico">
+
+        <!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
+        <!--[if lt IE 9]>
+                <script src="/js/html5shiv.js"></script>
+                <script src="/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        		<header>
+			<div class="navbar">
+				<div class="navbar-header">
+					<div class="container">
+						<ul class="info pull-left">
+							<li><a href="mailto:contact@iilab.org"><i class="icon-mail-1 contact"></i> contact@iilab.org </a></li>
+						</ul>
+						<ul class="social pull-right">
+							<li><a href="http://www.facebook.com/iilab.org"><i class="icon-s-facebook"></i></a></li>
+							<li><a href="https://plus.google.com/b/106011859086478758954/106011859086478758954"><i class="icon-s-gplus"></i></a></li>
+							<li><a href="http://twitter.com/iilab"><i class="icon-s-twitter"></i></a></li>
+							<li><a href="https://github.com/iilab"><i class="icon-s-github"></i></a></li>
+							<li><a href="http://www.linkedin.com/company/iilab"><i class="icon-s-linkedin"></i></a></li>
+							<li><a href="../rss.xml"><i class="icon-s-rss"></i></a></li>
+						</ul>
+						<a class="navbar-brand" href="index.html"><img src="../images/logo.svg" class="logo" alt></a>
+						<a class="btn responsive-menu pull-right" data-toggle="collapse" data-target=".navbar-collapse"><i class="icon-menu-1"></i></a>
+					</div>
+				</div>
+				<div class="yamm">
+					<div class="navbar-collapse collapse">
+						<div class="container">
+							<a class="navbar-brand" href="../index.html"><img src="../images/logo.svg" class="logo" alt></a>
+							<ul class="nav navbar-nav pull-right">
+								<li class="dropdown">
+									<a href="../" class>Home</a>
+								</li>
+								<li class="dropdown">
+									<a href="../#about" class>About</a>
+								</li>
+								<li class="dropdown">
+									<a href="../#work" class>Work</a>
+								</li>
+								<li class="dropdown">
+									<a href="../#team" class>Team</a>
+								</li>
+								<li class="dropdown">
+									<a href="../news.html" class>News</a>
+								</li>
+								<li class="dropdown">
+									<a href="#footer" class>Contact</a>
+								</li>
+								<!-- <li class="dropdown pull-right searchbox">
+									<a href="#" class="dropdown-toggle js-activated"><i class="icon-search"></i></a>
+									<div class="dropdown-menu">
+										<form id="search" class="navbar-form search" role="search">
+											<input type="search" class="form-control" placeholder="Type to search">
+											<button type="submit" class="btn btn-default btn-submit icon-right-open"></button>
+										</form>
+									</div>
+								</li>/.searchbox -->
+							</ul><!-- /.nav -->
+						</div><!-- /.container -->
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.yamm -->
+			</div><!-- /.navbar -->
+		</header>
+
+    <main>
+      <section id="blog-post" class="light-bg">
+        <div class="container inner-bottom classic-blog">
+          <div class="row">
+            
+            <div class="col-md-12 inner-sm">
+                
+              <div class="sidemeta">
+                              <div class="post format-gallery tech">
+                  
+                  <div class="date-wrapper">
+                    <div class="date">
+                        <span class="day">18</span>
+                        <span class="month">May</span>
+                        <span class="month">2015</span>
+                    </div><!-- /.date -->
+                  </div><!-- /.date-wrapper -->
+                  
+                  <div class="format-wrapper">
+                    <a href="#owl-work"><i class="icon-picture"></i></a>
+                  </div><!-- /.format-wrapper -->
+                  
+                  <div class="post-content">
+                    
+                    <h1 class="post-title">Solving the false alert bug in ‘Panic Button’</h1>
+                    
+                    <ul class="meta">
+                      
+                      
+                        <li class="categories">Engineering</li>
+                      
+                      
+                      
+                      <li class="categories">amnesty international, panic button</li>
+                      <!--<li class="comments"><a href="#">24</a></li>
+                      <li class="likes"><a href="#">73</a></li>-->
+                    </ul><!-- /.meta -->
+                    
+                    
+                    <p>To help solve the issue we tried to take a rigorous approach to modeling the trigger mechanism and the potential events that created false alerts. We took the approach that if we could see the problem and visualise its moving parts, then we could understand it and make better decisions. To complete the picture, we used a simple spreadsheet with a custom function to take a “data-driven” approach to changing the parameters. In a way, it’s a simple but accurate model of several ways that the panic button triggering mechanism works, which allows to explore different options and understand their impact on known “test cases”.</p>
+
+                    
+
+                    
+
+                    <div class="post-contents">
+                    <!--more-->
+<p>To a large extent we had only anectodal data about the issue. Having some users that closely worked with us to tell us when the false alert would occur helped a lot in creating hypotheses that helped us create a model of the problem. Given our concern for privacy, with adopting minimal data collection and with requesting minimal permissions on the Android app, we didn’t want to roll out a data logging component on the public version of the app. If we run into further issues down the road, we plan to release a stripped down “trigger logging” version of the app which would be installed independently of Panic Button and would help collect data about screen on off events on a broad range of phones and for a broad range of users.</p>
+<p>Here’s a way to simplify what’s going on. With multiple unintended clicks, sometimes one of the clicks ends up in the “confirmation window”, which is (in our current test version) between 8 secs (6 sec trigger time + 2 sec guard time) and 11 sec (+ 3s confirmation time).</p>
+<p>This might happen in two ways: - Long blinky event - a notification event which lasts longer than 8 seconds (probably rare) - Blinky event plus User event - a notification event creating an initial trigger which then waits for a confirmation, then the user picks up the phone and presses the power button within the confirmation window.</p>
+<p>So far we’ve increased the number of clicks needed before the trigger time and shorten the trigger time. However, this doesn’t seem to be solid enough because the false alert patterns are rapid clicks which sometimes might be continued beyond 8 secs, or probably more frequently the user actually acts during this confirmation window - by picking up their phone or pressing the power button.</p>
+<p>So one of the natural things to try is to extend the guard time (to 5 secs), but maybe more importantly, try to communicate to the user that the guard time is occurring. This should achieve a few things: - It should limit even further the possibility for a completely automated unintended trigger to occur, because such an event would need to occur over a much longer time, 11 seconds (6 sec trigger time + 5 sec guard time) to reach the “confirmation window” - In the case where a user action would generate the confirmation click without thinking about it (for instance, if the user picks up the phone shortly after - after the automated event occured) then their actions would be ignored during a longer time (5 seconds while in the guard time instead of 2 secs). - Once the user realises that the phone is vibrating with an unusual pattern, they have the chance to stop fiddling with their phones until the confirmation window is over (11 sec + 3 seconds). - In case they still actually trigger the alert, they will feel a vibration pattern that will communicate more obviously that the alert has started. Giving them a chance to cancel it, or making them reassured in an emergency situation that it has been correctly activated.</p>
+<p>The question becomes, how to communicate to the user? I suggest that we use a vibration pattern that has it’s “signature” and helps trigger “haptic memory” by its recognisable nature. Simply repeating a short vibration every seconds 4 times (“straight 4s”) seems like a natural starting point. The problem is that it might not be recognisable enough, or distinguisable from a regular notification vibration. In the case where the phone would be lying on a table and would attract the attention of the user that way, this “straight 4s” pattern might not stand out. I suggest that a countdown pattern will more easily evoke “alert” in the user’s mind. The pattern I propose we try would be 4 short vibrations on the first second. 3 vibration on the next, then 2 then 1.</p>
+<p>Finally, I also think we should then communicate to the user about the result of either action or inaction (or false manipulation). I propose that we create a much more obvious activation vibration pattern that makes it unmistakeable that the alert has started. I think there are benefits in helping people mitigate the problem if false alerts start sending (despite our efforts to make this even more unlikely) but maybe more importantly, it should help provide a reassuring signal to the user that everything worked as planned when they’re in an emergency. I suggest we use the multiples of 4 pattern again, with 4 long vibrations. Conversely, if the confirmation has not been triggered, then 3 short bursts should help signal the user that it’s now safe to use their power button.</p>
+<p>Here’s what the user experience would feel like as a consequence:</p>
+<ul>
+<li><p>Voluntary trigger:</p>
+<ul>
+<li>I press multiple times on the power button in my pocket.</li>
+<li>I feel the Guard time pattern vibrations (which bring back a reassuring haptic memory from the wizard)</li>
+<li>I realise that Panic Button is waiting for a confirmation and I wait until the Guard time pattern is finished.</li>
+<li>I then press the power button once more to confirm.</li>
+<li>I feel the 4 long vibrations which confirms that the alert is activated. <br><br></li>
+</ul></li>
+<li><p>Avoiding false alert:</p>
+<ul>
+<li>I pick up my phone at the other end of the room after I received a notificaiton.</li>
+<li>I feel the Guard time pattern vibrations (which bring back the haptic memory)</li>
+<li>(possibly) I rush into clicking but because I’m inside the guard time, the alert doesn’t trigger.</li>
+<li>I realise that Panic Button is vibrating and is therefore waiting for a confirmation.</li>
+<li>I wait until I feel the “cancel” vibration.</li>
+</ul></li>
+</ul>
+<p>Ideally after confirming that this doesn’t cause a problem we would run a test within our larger pilot groups and ask for feedback. Maybe also run tests like you guys did with Bernard asking random potential users to achieve a task.</p>
+<p>There might be another pattern to consider which would require to change the trigger mechanism even more, which might have some implications on how easy it is to learn how to trigger and for users who already got trained to learn the new mechanism. This pattern would transform the guard window into a cancel window. In this scenario, there would be also a 5 secs vibration pattern, but the user would not have to confirm at the end of it. Instead not doing anything will trigger the alert. Adding a press during this “cancel window” will “abort” the coutdown and not trigger the alert.</p>
+<p>Finally, what we also need is more data. Because of the privacy and connectivity implications of adding a “logging” piece of code in the released APK, I think that we should create a stripped down version of the APK with only the power button receiver and a log collection server (we used a couple for debuggin purposes) and ask folks who would want to take part in our “bug chase” to help use map the behavior of phones out there by accepting to submit to us periodic anonymous reports of vibration patterns of android phones. We could make a nice data visualisation out of it and maybe find a way to incentivise users to participate with a clever communication strategy… (“help us make panic button work for the most people possible”?)</p>
+<p>Cheers,</p>
+<p>Jun</p>
+                    </div>
+                    
+                  </div><!-- /.post-content -->
+                  
+                </div><!-- /.post -->
+                
+                
+              								    <div id="disqus_thread"></div>
+
+              </div><!-- /.sidemeta -->
+            </div><!-- /.col -->            
+          </div><!-- /.row -->
+        </div><!-- /.container -->
+      </section>
+    </main>
+		<footer id="footer" class="dark-bg">
+			<div class="container inner">
+				<div class="row">
+
+					<div class="col-md-3 col-sm-6 inner">
+						<h4>Who we are</h4>
+						<a href="index.html"><img class="logo img-intext" src="../images/logo-white.svg" alt></a>
+						<p>We harness information innovation to help your social good initiatives improve their human impact.</p>
+						<a href="../index.html#team" class="txt-btn">More about us</a>
+					</div><!-- /.col -->
+
+					<div class="col-md-3 col-sm-6 inner">
+						<h4>Latest projects</h4>
+
+						<div class="row thumbs gap-xs">
+							
+							<div class="col-xs-6 thumb">
+								<a href="../projects/open-oil-framework.html">
+								<figure class="icon-overlay icn-link">
+									<figcaption class="text-overlay">
+										<div class="info">
+											<p>Open Oil Data Framework</p>
+										</div><!-- /.info -->
+									</figcaption>
+									<img src="../images/tiny/projects/work_openoil.png" alt="Company Ownership Graph">
+								</figure>
+								</a>
+							</div><!-- /.thumb -->
+							
+							<div class="col-xs-6 thumb">
+								<a href="../projects/open-droplet.html">
+								<figure class="icon-overlay icn-link">
+									<figcaption class="text-overlay">
+										<div class="info">
+											<p>Open Droplet</p>
+										</div><!-- /.info -->
+									</figcaption>
+									<img src="../images/tiny/projects/work_droplet.png" alt="Open Droplet Website">
+								</figure>
+								</a>
+							</div><!-- /.thumb -->
+							
+							<div class="col-xs-6 thumb">
+								<a href="../projects/internet-measurement-observation.html">
+								<figure class="icon-overlay icn-link">
+									<figcaption class="text-overlay">
+										<div class="info">
+											<p>Internet Measurement and Observation</p>
+										</div><!-- /.info -->
+									</figcaption>
+									<img src="../images/tiny/projects/work_ecsa.png" alt="Semantic Wiki">
+								</figure>
+								</a>
+							</div><!-- /.thumb -->
+							
+							<div class="col-xs-6 thumb">
+								<a href="../projects/panic-button.html">
+								<figure class="icon-overlay icn-link">
+									<figcaption class="text-overlay">
+										<div class="info">
+											<p>Panic Button</p>
+										</div><!-- /.info -->
+									</figcaption>
+									<img src="../images/tiny/projects/work_panicbutton.png" alt="Website">
+								</figure>
+								</a>
+							</div><!-- /.thumb -->
+							
+							<div class="col-xs-6 thumb">
+								<a href="../projects/electronic-medical-record.html">
+								<figure class="icon-overlay icn-link">
+									<figcaption class="text-overlay">
+										<div class="info">
+											<p>Electronic Medical Record</p>
+										</div><!-- /.info -->
+									</figcaption>
+									<img src="../images/tiny/projects/work_ltfhc.jpg" alt="Hardware Integration">
+								</figure>
+								</a>
+							</div><!-- /.thumb -->
+							
+							<div class="col-xs-6 thumb">
+								<a href="../projects/open-integrity-index.html">
+								<figure class="icon-overlay icn-link">
+									<figcaption class="text-overlay">
+										<div class="info">
+											<p>Open Integrity Index</p>
+										</div><!-- /.info -->
+									</figcaption>
+									<img src="../images/tiny/projects/work_oii.png" alt="Open Integrity Index Website">
+								</figure>
+								</a>
+							</div><!-- /.thumb -->
+							 
+						</div><!-- /.row -->
+					</div><!-- /.col -->
+
+					<div class="col-md-3 col-sm-6 inner">
+						<h4>Get In Touch</h4>
+						<ul class="contacts">
+							<li><a href="mailto:contact@iilab.org"><i class="icon-mail-1 contact"></i> contact@iilab.org</a></li>
+							<li><i class="icon-location contact"></i> iilab London<br> Unit 36, 88-90 Hatton Garden<br> London EC1N 8PN - United Kingdom</li>
+							<li><i class="icon-location contact"></i> iilab Berlin<br> Straßburger Straße 29<br>10405 Berlin - Germany</li>
+							<li><i class="icon-info contact"></i> Registered in England & Wales. <br> Reg. No: 08332887. VAT No: GB172453217</li>
+						</ul><!-- /.contacts -->
+					</div><!-- /.col -->
+
+					<div class="col-md-3 col-sm-6 inner">
+						<h4>Stay in touch</h4>
+						<p>On social networks and via rss.</p>
+
+						<div id="share" class="row">
+							<div class="col-sm-2 reset-padding">
+								<a href="http://www.facebook.com/iilab.org" class="btn-share-sm">
+									<i class="icon-s-facebook"></i>
+								</a>
+							</div><!-- /.col -->
+							
+							<div class="col-sm-2 reset-padding">
+								<a href="http://twitter.com/iilab" class="btn-share-sm">
+									<i class="icon-s-twitter"></i>
+								</a>
+							</div><!-- /.col -->
+							
+							<div class="col-sm-2 reset-padding">
+								<a href="https://plus.google.com/b/106011859086478758954/106011859086478758954" class="btn-share-sm">
+									<i class="icon-s-gplus"></i>
+								</a>
+							</div><!-- /.col -->
+
+							<div class="col-sm-2 reset-padding">
+								<a href="https://github.com/iilab" class="btn-share-sm">
+									<i class="icon-s-github"></i>
+								</a>
+							</div><!-- /.col -->
+							
+							<div class="col-sm-2 reset-padding">
+								<a href="http://www.linkedin.com/company/iilab" class="btn-share-sm">
+									<i class="icon-s-linkedin"></i>
+								</a>
+							</div><!-- /.col -->
+							
+							<div class="col-sm-2 reset-padding">
+								<a href="../rss.xml" class="btn-share-sm">
+									<i class="icon-s-rss"></i>
+								</a>
+							</div><!-- /.col -->
+																
+						</div>
+						<p>Receive email updates about our projects.</p>
+
+						<form id="newsletter" class="form-inline newsletter" role="form" action="https://iilab.us4.list-manage.com/subscribe/post" method="POST">
+							<input type="hidden" name="u" value="c026c6b05afa24ee6d7fb3626">
+							<input type="hidden" name="id" value="a218f30db9">
+
+							<label class="sr-only" for="MERGE0">Email address</label>
+						    <input type="email" class="form-control" placeholder="Enter your email address" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0">
+							<button type="submit" class="btn btn-default btn-submit">Subscribe</button>
+						</form>
+
+					</div><!-- /.col -->
+				</div><!-- /.row --> 
+			</div><!-- .container -->
+
+			<div class="footer-bottom">
+				<div class="container inner">
+					<p class="pull-left">© 2015 iilab. All rights reserved.</p>
+					<ul class="footer-menu pull-right">
+						<li><a href="../">Home</a></li>
+						<li><a href="../#about">About</a></li>
+						<li><a href="../privacy.html">Privacy</a></li>
+						<li><a href="../#work">Work</a></li>
+						<li><a href="../#team">Team</a></li>
+						<li><a href="../news.html">News</a></li>
+					</ul><!-- .footer-menu -->
+				</div><!-- .container -->
+			</div><!-- .footer-bottom -->
+		</footer>
+<script type="text/javascript">
+    var disqus_shortname = 'iilab';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+                <!-- JavaScripts placed at the end of the document so the pages load faster -->
+        <!-- Piwik -->
+        <script type="text/javascript">
+          var _paq = _paq || [];
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.iilab.org/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', 1]);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+            g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+        <noscript><p class="piwik"><img src="https://stats.iilab.org/piwik.php?idsite=1" style="border:0;" alt /></p></noscript>
+        <script src="../js/scripts.js"></script> 
+        
+        <!-- OnScroll CSS3 Animations for Modern Browsers and IE10+ -->
+        <!--[if !IE]> -->
+            <script src="../js/onscroll.js"></script>
+        <!-- <![endif]-->
+
+    </body>
+</html>
