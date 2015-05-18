@@ -1,4 +1,4 @@
-I've recently started to look into learning Haskell and have been in the books for a few months, so didn't yet have to experience the practical side of what comes with the workflow of working with Haskell. 
+I've recently started to learn Haskell and have been in the books for a few months, so didn't yet have to experience the practical side of what comes with the workflow of working with Haskell. 
 
 I decided to try getting my hands dirty with a simple project, migrating the iilab website to the Haskell static site generator [Hakyll](http://jaspervdj.be/hakyll/). In this post I look at how I setup my development environment, and hope to ease the pain for others that are used to the simple ```npm install``` style workflows by looking at the latest in how to deal with Haskell dependency problems also known as "cabal hell". 
 
@@ -17,7 +17,11 @@ I recursed through a few rabbit holes after my metalsmith/npm woes by trying Hak
 In short, here's how the pieces fit together:
 
  - Nix provides **declarative** and **deterministic** package management. Read about [why you should care](https://www.domenkozar.com/2014/03/11/why-puppet-chef-ansible-arent-good-enough-and-we-can-do-better/).
- - HaskellNG draws on Nix to make Haskell package management **declarative** and goes beyond the current ```cabal sandbox``` approach by allowing reuse of already compiled binaries (instead of having to recompile separately in every sandbox) and helps deal with dependencies at the compiler level, therefore [allowing to test bleeding edge compiler features](https://mail.haskell.org/pipermail/haskell-cafe/2015-March/118817.html) without fear of messing up your development environment.
+<br><br>
+ - HaskellNG draws on Nix to make Haskell package management **declarative** and goes beyond the current ```cabal sandbox``` approach by allowing:
+
+    - reuse of already compiled binaries (instead of having to recompile separately in every sandbox) and
+    - dealing with dependencies at the compiler (and cabal) level, therefore [allowing to test bleeding edge compiler features](https://mail.haskell.org/pipermail/haskell-cafe/2015-March/118817.html) without fear of messing up your development environment.
 
 ## Nix
 
@@ -29,19 +33,24 @@ Nix then offers a number of wrapping tools to make these binaries available, for
 
 When using ```nix-shell``` you're using a **project environment** which might have different dependencies.
 
-
 ## Nix on OSX
 
 The great thing, given my current dependency on this fruity old laptop and its pretty UX, is that Nix is available on OSX. I took me a little bit of meandering to find out because there are [outdated blog posts](http://www.chrisjr.org/posts/2014/12/22/nix-osx-haskell/) on the web (which give workarounds from **before** the OSX changes were marged into the Nix master branch) that [these instructions on the NixOS Wiki about **Using Nix on 10.9 and 10.10**](https://nixos.org/wiki/Nix_on_OS_X#Using_Nix_on_10.9_and_10.10) actually work just fine. I did bump into a problem because I started installing from the wrong git repo, a number of weird errors came up after switching to the correct instructions which meant that I had to restart from scratch and remove all the nix directories (/nix/store and ˜/.nix-profile).
 
 ## HaskellNG on Nix
 
-When I first bumped into [this post about the new way](http://article.gmane.org/gmane.linux.distributions.nixos/15513) to do Haskell with Nix, I thought : "Oh, this looks great but very bleeding edge and I'm down several rabbit holes already so let's look at it later". So I went my merry way installing following [the official Nix instructions on the wiki](https://nixos.org/wiki/Haskell). But then after installing the Haskell toolkit (apparently the [Nix crowd is too cool for the Haskell Platform](https://www.mail-archive.com/nix-dev@lists.science.uu.nl/msg13622.html)) I found out that the Nix tribe on OSX seemed to have already left the old ways behind and migrated to HaskellNG. I found out because I ran into this error
+When I first bumped into [this post about the new way](http://article.gmane.org/gmane.linux.distributions.nixos/15513) to do Haskell with Nix, I thought : "Oh, this looks great but very bleeding edge and I'm down several rabbit holes already so let's look at it later". So I went my merry way installing following [the official Nix instructions on the wiki](https://nixos.org/wiki/Haskell). But then after installing the Haskell toolkit (apparently the [Nix crowd is too cool for the Haskell Platform](https://www.mail-archive.com/nix-dev@lists.science.uu.nl/msg13622.html)) I found out that the Nix tribe on OSX seemed to have already left the old ways behind and migrated to HaskellNG. I found out because I ran into this error:
 
 ```
 installing ‘haskell-hakyll-ghc7.8.4-4.6.1.1-shared’
 error: Package ‘util-linux-2.26’ in ‘/../dev/nixpkgs/pkgs/os-specific/linux/util-linux/default.nix:54’ is not supported on ‘x86_64-darwin’, refusing to evaluate.
 ```
+
+Here are a few reasons why HaskellNG is the way to go, as summarised in the [[Nix-dev] A Journey into the Haskell NG infrastructure: Part I](http://lists.science.uu.nl/pipermail/nix-dev/2015-January/015591.html) post:
+
+ - The NG package set contains the latest version of every package available from Hackage
+ - Haskell NG supports GHC 7.10.x.
+ - Haskell NG allows you to configure the hell out of your installation.
 
 ## Step by step
 
