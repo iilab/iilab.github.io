@@ -6831,6 +6831,7 @@ url('../fonts/fontello/fontello-circle.svg#fontello') format('svg');
 .icon-circle-empty:before { content: '\e800'; } /* '' */
 body {
     color: #878787;
+    background-color: #FFF;
 }
 
 h1,
