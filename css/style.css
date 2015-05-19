@@ -6832,6 +6832,15 @@ url('../fonts/fontello/fontello-circle.svg#fontello') format('svg');
 body {
     color: #878787;
     background-color: #FFF;
+    font-size: 22px;
+    line-height: 165%;
+}
+
+body #blog {
+    color: #878787;
+    background-color: #FFF;
+    font-size: 18px;
+    line-height: 150%;
 }
 
 h1,
