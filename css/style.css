@@ -6852,6 +6852,23 @@ h6 {
     color: #656565;
 }
 
+#blog-post h2 {
+  margin-top: 80px;
+}
+
+#blog-post h2::before {
+  content: "";
+  display: block;
+  width: 8%;
+  margin: 0px 46% 0px 46%;
+  border-top: #BBB 1px solid;
+  margin-bottom: 80px;
+}
+
+p a {
+  border-bottom: 1px solid #BBB;
+}
+
 .owl-carousel {
   display: block;
 }
