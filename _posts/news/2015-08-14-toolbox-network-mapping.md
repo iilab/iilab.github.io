@@ -16,7 +16,9 @@ Our team will be made up of Kat (me), Head of Research and Design, Lilas, Resear
 
 We want to hear from both the experienced influence mapping community and with people just starting out. Your feedback will help us better design the Influence Mapping Toolbox.
 
-Just starting a project? Recently developed one or a few projects? We’d like to invite you to [answer our questionnaire](https://docs.google.com/forms/d/149mqSqwxCWZDkBT2RhEph-H4ZyOudcWjhbi2Wffz0vU/viewform). It will only take 10 minutes of your time and will help a lot to build the toolbox. You also can get in touch directly via email to influencemapping@iilab.org or by following the [Influence Mapping Google Group](https://groups.google.com/forum/#!forum/influencemapping) thread. 
+Just starting a project? Recently developed one or a few projects? **We’d like to invite you to [answer our questionnaire](https://docs.google.com/forms/d/149mqSqwxCWZDkBT2RhEph-H4ZyOudcWjhbi2Wffz0vU/viewform)**. 
+
+It will only take 10 minutes of your time and will help a lot to build the toolbox. You also can get in touch directly via email to influencemapping@iilab.org or by following the [Influence Mapping Google Group](https://groups.google.com/forum/#!forum/influencemapping) thread. 
 
 From **experienced practitioners**, we'd particularly like to hear about:
 
