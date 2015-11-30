@@ -7,8 +7,70 @@
         <description><![CDATA[iilab harnesses information innovation to help your social good initiatives improve their human impact.]]></description>
         <atom:link href="https://iilab.org/rss.xml" rel="self"
                    type="application/rss+xml" />
-        <lastBuildDate>Fri, 14 Aug 2015 00:00:00 UT</lastBuildDate>
+        <lastBuildDate>Mon, 30 Nov 2015 00:00:00 UT</lastBuildDate>
         <item>
+    <title>Countdown 2030 - Citizen Science Challenges and Opportunities</title>
+    <link>https://iilab.org/news/2015-11-30-countdown-2030.html</link>
+    <description><![CDATA[<p>Citizen science is a pretty wonderful phenomenon that is changing the dynamics of knowledge generation in the same way that open access is changing the dynamics of knowledge ownership. So how can we make it even better?</p>
+<!--more-->
+<p>The next step in citizen science is to incorporate different aspects of design - particularly ideas around embodied cognition, social development theory and human centric design. Why? Because the next step in the citizen science journey is to anchor it more fully in lived experience, to help citizen science and its enabling technology to create bridges between people and a lens through which to understand the world’s complexity.</p>
+<p>I expand on these ideas in this talk, which was presented remotely at <a href="http://www.igp.ucl.ac.uk/igp-events-pub/countdown-2030">UCL’s Institute of Global Prosperity’s Countdown 2030 conference</a> on Saturday. The conference had an amazing line-up, looking at the advances being brought by young researchers that could have a significant impact on the development of science and society in the next 15 years. It was an honour to be part of the line-up organised by <a href="https://www.ucl.ac.uk/excites/people/academic-staff/muki-haklay">Muki Haklay of UCL ExCITES</a>.</p>
+<p>Here’s the video of the recorded presentation:</p>
+<center>
+<div class="iframeWrapper">
+<div class="video-container post-media">
+<iframe src="//player.vimeo.com/video/147366069?color=506a85" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+<p>
+<a href="http://vimeo.com/147366069">Countdown 2030 - Citizen Science Challenges and Opportunities</a> from <a href="http://vimeo.com/iilab">iilab</a> on <a href="https://vimeo.com">Vimeo</a>.
+</p>
+</div>
+</div>
+</center>
+<p><br></p>
+<p>And here are the slides with the transcript below, including some references:</p>
+<center>
+<div class="iframeWrapper">
+<iframe src="//www.slideshare.net/slideshow/embed_code/55640817" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen>
+</iframe>
+<div style="margin-bottom:5px">
+<strong> <a href="//www.slideshare.net/KatAusten/countdown2030-kat-austen" title="Countdown 2030 - Kat Austen" target="_blank">Countdown 2030 - Kat Austen</a> </strong> from <strong><a href="//www.slideshare.net/katausten" target="_blank">Kat Austen</a></strong>
+</div>
+</div>
+</center>
+<p><br></p>
+<p>I want to talk about 2 aspects that I think could prove fruitful for citizen science now and in the future, namely creating a richer experience of data, and human-centered design. I’ll then open it up to more creative thoughts about the role of citizen science in our future society.</p>
+<ul>
+<li>Data can be misleading, and datasets need to be richer to help provide context.</li>
+<li>Squashing a rich dataset into one node or line can lead to loss of information or misrepresentation</li>
+<li>It’s also the case that diifferent modes of interaction with the data can produce different insights and behaviours. We understand the world - and data - in part from our physical interactions, and that aspect is something that’s is largely neglected.</li>
+</ul>
+<p><br></p>
+<ul>
+<li>We already know that the use of devices change how we think whether that’s in terms of spatial awareness, reasoning or interpretation</li>
+<li>And we know that interacting with data through other senses uncovers different patterns in the data than visualisation - eg Brain Stethoscope by Parvisi and Chafe sonified EEG patterns as a more effective way to detect epileptic fits Epilepsy and Behaviour May 2015, Volume 46, Pages 53–54</li>
+<li>We also make meaning of data through a cultural filter, so working with community interpretation of data also produces different insights and behaviours - something leveraged in citizen and DIY science.</li>
+</ul>
+<p>There are presently challenges in citizen science in terms of durability of projects - that is sustained engagement. A common question raised is also around the data quality - either from too few participants, from incomplete or sparse datasets, or poor adherence to scientific methodologies.</p>
+<p>Finally, there are ethical and political considerations - in the worst case, citizen scientists can be viewed as unpaid data collectors, or in the case of gamified engagement as human ginuea pigs. Should citizens have more influence over citizen science projects than just funding them with taxes and contributing to them with their time? There’s also the possibility of missing out on the potential of innovation either in method or instrumentation, if citizen scientists are not fully engaged.</p>
+<p>So, how do we make the most of citizen science projects for global prosperity? To do this we need to anchor citizen science in human experience, which should create greater understanding and more durable engagement.</p>
+<p>I’m interested in using interdisciplinary methods to move into an even more human centred and holistic view of citizen science in a person’s life and in society. That translates into combining citizen science methods, with embodied experiences that put that our shared learning into context</p>
+<p>Let me give you 2 examples of this in my work. One is from Piksel Festival in Bergen, Norway, and uses embodied cognition principles to create stronger relationships between citizens and the meaning of the data they produce in the course of their experiments.</p>
+<p>With my collaborators, we’ve been working on developing tools to help anyone test for micro-plastics using household chemicals and equipment. We were also making and using DIY hydrophones to check for human-made sound pollution in the fjord.</p>
+<p>From there we’ve also been working on informing a new way to engage with the data through design of a “coral empathy” prototype, which will eventually use the audio data captured by hydrophones to create and tune vibrations in a helmet. The microplastic pollution is translated into smells, which will be dialled up or down depending on the pollution that is detected.</p>
+<p>My second example comes from my work at iilab, where we are working on centring first on the needs of the community and determining what data needs to be collected. In collaboration with UCL and Newcastle University’s Open Lab, we have recently launched the Engineering Comes Home project, where we’re investigating the use of community co-design methods in application to infrastructure engineering at the nexus of food, water, waste and energy resource use.</p>
+<p>What data should be gathered is very open because there’s virtually no data around domestic and community behaviour around this nexus. We can let the community decide which indicators to focus on, hoping this will make the engagement sustainable, and to help the community engage with the politics of infrastructure.</p>
+<p>In this project we will combine approaches from multiple disciplines alongside the knowledge from the community to understand and design for citizen sensing and intervention requirements.</p>
+<p>Particularly pertinent for this project is the importance of creating a way to engage with the complexity of the interconnected food, waste, water and energy infrastructure systems, by designing prototype technologies that allow communities to connect with and intervene in these systems in a holistic way.</p>
+<p>During the course of the project, it’s fundamental to create real links between people through the engagement with citizen science tools and data platforms. Here we can learn from work from community building with digital media - such as community forums and digital storytelling, and advances using tangible user interfaces for collaborative learning.</p>
+<p>In 15 years, innovations from academia and hackerspaces alike will enable a more physical and emotive engagement with data gathering, processing and representation. This will make us more connected with our environment and will make complex systems easier to understand.</p>
+<p>Science will be more integrated with society and politics, and both science and politics will be more participative. And people will feel more active and influential in the world they live in.</p>
+<p>This more physical engagement with knowledge will create links between people, bringing people out of their data bubble. We will move beyond screens, beyond data, to a more integrated understanding and embodied experience of our knowledge - together.</p>]]></description>
+    <pubDate>Mon, 30 Nov 2015 00:00:00 UT</pubDate>
+    <guid>https://iilab.org/news/2015-11-30-countdown-2030.html</guid>
+    <dc:creator>iilab</dc:creator>
+</item>
+<item>
     <title>Help us make a new tool to guide network mappers</title>
     <link>https://iilab.org/news/2015-08-14-toolbox-network-mapping.html</link>
     <description><![CDATA[<p>We are surrounded by complex systems and power structures, not least of which are the networks of links between people by which they change and are changed. Understanding these links can sometimes have important consequences - for instance if you see that a policy-maker has strong personal ties to a lobbying organisation, you may see their decisions in a different light.</p>
@@ -296,20 +358,6 @@ nix-shell --command &#39;cabal build&#39;
 <p>Last month I had the pleasure to meet up in person with the students from Sarah Bell’s MSc Environmental Systems Engineering at UCL. Our team consists of Florian Abiteboul, Shanshan Tang, Cecilia Li, and Shibei Cheng and Anita Ponnathpore and it was a great first meeting. Having introduced the project, I’ve asked them to start off with the background research for a protocol to rapidly categorise cities in terms of their water infrastructure in order to see where Open Droplet’s approach might be most effective. When we meet this month, we’ll be handing over plans from the industrial research so that the students can then test calibration and flow detection in UCL’s toilets and showers.</p>]]></description>
     <pubDate>Sun, 02 Nov 2014 00:00:00 UT</pubDate>
     <guid>https://iilab.org/news/2014-11-02-open-droplet-lote4.html</guid>
-    <dc:creator>iilab</dc:creator>
-</item>
-<item>
-    <title>Open Droplet features on Serpentine Gallery's extinct.ly platform</title>
-    <link>https://iilab.org/news/2014-10-18-open-droplet-serpentine-extinctly.html</link>
-    <description><![CDATA[<p>“the spectre of extinction looms over the ways in which we understand our being in the world today.”</p>
-<p>At London’s Serpentine Gallery this weekend thinkers, scientists and artists are coming together to focus on this ever present spectre at the <a href="http://www.serpentinegalleries.org/exhibitions-events/extinction-marathon">Extinction Marathon</a>.</p>
-<!--more-->
-<p>Understanding that it is only through collective action that we might avoid a disaster on a global scale, the gallery has commissioned <a href="http://extinct.ly">extinct.ly</a>, an online platform to act as a resource for researchers and those who wish to effect change.</p>
-<p>We are honoured that Open Droplet has been picked to appear alongside other excellent projects such as <a href="http://hack4good.io/">hack4good</a> and our project partner <a href="https://iilab.org/projects/open-oil-framework.html">Open Oil</a> as the first projects to feature in extinct.ly’s launch.</p>
-<p>On <a href="http://www.extinct.ly/casestudies/#open-droplet">Open Droplet’s page on extinct.ly</a> you can experience the near-future scenario that we have crafted around water scarcity.</p>
-<p><a href="http://www.extinct.ly/casestudies/#open-droplet"><img src="/images/news/droplet-extinctly.png" /></a></p>]]></description>
-    <pubDate>Sat, 18 Oct 2014 00:00:00 UT</pubDate>
-    <guid>https://iilab.org/news/2014-10-18-open-droplet-serpentine-extinctly.html</guid>
     <dc:creator>iilab</dc:creator>
 </item>
 
