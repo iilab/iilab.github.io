@@ -21,21 +21,21 @@ You can [read and download the report from the Ofwat website](http://www.ofwat.g
 
 I’ve been part of the Task and Finish group over the last year, and you may remember that [we launched a call for participation earlier this year](https://iilab.org/news/2015-07-28-uk-water-resilience.html). Thank you to everyone who contributed. I’m thrilled that the recommendations contain calls for open data and greater citizen agency have been included in the report: 
 
-
-_2. Increase public engagement and education 
-When: 2015 - 2020
-Lead: Water companies and governments
-Involved: All sector and non sector partners, including stakeholders and third parties
-Using a common definition, or set of definitions, there is a need to engage the wider public, particularly in relation to risk, and to develop a common understanding of the acceptability of risk. This engagement should be twofold. Firstly it should involve the provision of pertinent information on a wide scale on an ongoing basis, with the aim of enhancing public understanding of water systems. Secondly it should aim to ensure this information is transformed into active engagement (which will lead to positive environmental behaviour) - the public should be given an active role in resilience, both in terms of adaptation and mitigation.
-The action to deliver this recommendation sits with all bodies in the sector. But it sits primarily with water companies who must undertake much more active engagement and with governments who, whilst they are unlikely to do any public outreach in this area, must reinstate areas where they have removed information provision, like the reintroduction of the water cycle as a key element of the national curriculum. The water sector should, where possible, continue to increase access to data, subject to commercial confidentiality and security exemptions. The sector strategic dashboard currently being developed by water companies, regulators and other stakeholders could be a helpful contribution to facilitating that access. More open data would assist better public understanding and engagement and could promote innovation and understanding and increase resilience through crowd sourced solutions and oversight._
+_**2. Increase public engagement and education**_<br>
+_When: 2015 - 2020_<br>
+_Lead: Water companies and governments_<br>
+_Involved: All sector and non sector partners, including stakeholders and third parties_<br>
+_Using a common definition, or set of definitions, there is a need to engage the wider public, particularly in relation to risk, and to develop a common understanding of the acceptability of risk. This engagement should be twofold._<br>
+_Firstly it should involve the provision of pertinent information on a wide scale on an ongoing basis, with the aim of enhancing public understanding of water systems. Secondly it should aim to ensure this information is transformed into active engagement (which will lead to positive environmental behaviour) - the public should be given an active role in resilience, both in terms of adaptation and mitigation._<br>
+_The action to deliver this recommendation sits with all bodies in the sector. But it sits primarily with water companies who must undertake much more active engagement and with governments who, whilst they are unlikely to do any public outreach in this area, must reinstate areas where they have removed information provision, like the reintroduction of the water cycle as a key element of the national curriculum. The water sector should, where possible, continue to increase access to data, subject to commercial confidentiality and security exemptions. The sector strategic dashboard currently being developed by water companies, regulators and other stakeholders could be a helpful contribution to facilitating that access. More open data would assist better public understanding and engagement and could promote innovation and understanding and increase resilience through crowd sourced solutions and oversight._<br>
 
 and
 
-_6. Improve the understanding of risk and failure When: 2015 - 2020
-Lead: Environment Agency, Natural Resources Wales, water companies
-There needs to be broad discussion, involving all parties including customers, leading to agreement on the level of service which should be planned for in each area. This would be based on better understanding and communication of the risks faced by the water sector, of the costs of failure, and of the costs and benefits of measures to avert, manage and recover from failure. Coping strategies for dealing with ‘beyond resilience’ emergencies (black swan events) also need to be agreed, in advance of their occurrence. Progress in these matters will enable water companies to focus on the risks to critical assets and services, and to plan for the effective delivery of services in critical conditions, with a mandate from their customers and society, and from their regulators and government.
-Another requirement is an appreciation by all that some failures will occur, notwithstanding best plans being laid and large investment being made; for example, expecting zero leakage and never having supply interruptions is unhelpful thinking.
-Risk could also be better understood and dealt with through more open data, enabling wider scrutiny of water and wastewater management. This could link to the sector strategic dashboard that is currently under development._
+_**6. Improve the understanding of risk and failure When: 2015 - 2020**_<br>
+_Lead: Environment Agency, Natural Resources Wales, water companies_<br>
+_There needs to be broad discussion, involving all parties including customers, leading to agreement on the level of service which should be planned for in each area. This would be based on better understanding and communication of the risks faced by the water sector, of the costs of failure, and of the costs and benefits of measures to avert, manage and recover from failure. Coping strategies for dealing with ‘beyond resilience’ emergencies (black swan events) also need to be agreed, in advance of their occurrence. Progress in these matters will enable water companies to focus on the risks to critical assets and services, and to plan for the effective delivery of services in critical conditions, with a mandate from their customers and society, and from their regulators and government._<br>
+_Another requirement is an appreciation by all that some failures will occur, notwithstanding best plans being laid and large investment being made; for example, expecting zero leakage and never having supply interruptions is unhelpful thinking._<br>
+_Risk could also be better understood and dealt with through more open data, enabling wider scrutiny of water and wastewater management. This could link to the sector strategic dashboard that is currently under development._<br>
 
 ## Get your hands wet
 
@@ -48,7 +48,8 @@ We’re still working on the water resilience systems map. A static version is i
 ## Water resilience - what the papers say
 
 Meanwhile, if you have a more academic interest in water resilience, I compiled this literature review for the report. While the report is now closed, our interest in this topic is still as keen as ever. Please join the conversation if you have feedback that we can move forward with.
-Resilience of water systems
+
+### Resilience of water systems
 
 Like any complex system, resilience of water systems can be defined in terms of their response to specific threats over time (Haimes, 2009). Many factors are implicated in water resilience (Matthews, 2015), such as water scarcity for both green and blue water, water quality, flooding, waste water, salinisation, and economic scarcity where social resources required to successfully adapt to physical water scarcity fall short (Ohlsson, 2000), and it is the factors that feed into their provision that determines the resilience of the system with respect to a particular threat. A distinction can be made between man-made resilience issues, and those that occur naturally - for instance water scarcity as a result of natural conditions of low water availability in comparison to water scarcity mainly induced by a large human demand relative to natural availability (which can also happen in water abundant areas) (Schyns et al, 2015). This is an engineering resilience perspective, and one which has been largely adopted by the UK in its approach to resilience more broadly, and in this report. In the literature, alternative views of resilience exist, for instance a more socio-ecological view of resilience looks at resilience of a system in terms of the repurcussions on both human needs and ecosystem needs, seeing them as intrinsically linked. In such cases resilience is defined not as how well a system recovers from or adapts to events, but in terms of “the amount of disturbance a linked social-ecological system can absorb before reorganizing into a new state characterized by a different set of processes and structures.” (Garmestani et al. 2014).
 
@@ -58,8 +59,7 @@ Kennedy et al. also suggest thinking across geographical boundaries in terms of 
 
 In terms of governance and social systems, Ostrom has shown that collective governance of resources, including water resources, has success on a local scale (Ostrom, 1990). Here, the advent of big data can be of use in facilitating a more integrated approach to governance by leveraging social interest. Open data and citizen science approaches can augment water treatment and provision services (Buckingham Shum et al.), and lessons from disaster response in Kathmandu suggest that local open data ecosystems can aide rapid response to events (Soden et al., 2014).
 
-
-References
+### References
 
 Agudelo-Vera C., Mels A., Keesman K., and Rijnaarts H.. 2012. The Urban Harvest Approach as an Aid for Sustainable Urban Resource Planning, Journal of Industrial Ecology, Volume 16, Issue 6, 839–850
 
