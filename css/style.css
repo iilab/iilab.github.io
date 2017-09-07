@@ -6969,11 +6969,13 @@ p a {
 #blog-post .post img {
   width: 100%;
   height: auto;
+  margin-bottom: 10px;
 }
 
 #portfolio-post .post-project img {
   width: 100%;
   height: auto;
+  margin-bottom: 10px;
 }
 
 figcaption.overlay p {
